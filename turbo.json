@@ -1,18 +1,18 @@
 {
-	"$schema": "https://turborepo.org/schema.json",
-	"tasks": {
-		"dev": {
-			"cache": false,
-			"persistent": true
-		},
-		"build": {
-			"dependsOn": ["^build"],
-			"outputs": [".vite/dist/**", "dist/**"]
-		},
-		"preview": {
-			"dependsOn": ["build"],
-			"outputs": []
-		},
-		"lint": { "outputs": [] }
-	}
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".vite/dist/**", "dist/**"]
+    },
+    "preview": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "lint": { "outputs": [] }
+  }
 }
