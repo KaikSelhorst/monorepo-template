@@ -1,0 +1,41 @@
+# .github/workflows/ci.yml
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build com Turborepo
+        run: bunx turbo run build
+
+      # === FRONTEND: Vercel com Action oficial ===
+      - name: Deploy Frontend (Vercel)
+        if: contains(github.event.commits[0].modified, 'packages/app/')
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: packages/app
+          prod: true
+
+      # === BACKEND: Deploy manual (ex: VPS, Docker, Render) ===
+      # - name: Deploy Backend
+      #   if: contains(github.event.commits[0].modified, 'packages/api/')
+      #   run: |
+      #     rsync -avz packages/api/dist/ user@seu-servidor:/app/api/
+      #     ssh user@seu-servidor 'systemctl restart api.service'
+      #   env:
+      #     SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
