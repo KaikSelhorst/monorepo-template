@@ -1,0 +1,48 @@
+{
+  "format_on_save": "on",
+  "formatter": "language_server",
+  "language_servers": ["biome"],
+
+  "lsp": {
+    "biome": {
+      "binary": {
+        "path": "bunx",
+        "arguments": ["biome", "lsp-proxy"]
+      }
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "language_servers": ["biome"],
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "TypeScript": {
+      "language_servers": ["biome"],
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "TSX": {
+      "language_servers": ["biome"],
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "JSX": {
+      "language_servers": ["biome"],
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    }
+  }
+}
