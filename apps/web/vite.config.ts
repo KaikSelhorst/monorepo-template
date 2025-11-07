@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import { alias } from 'vite-config/alias'
+import { alias } from './vite-config/alias'
 import {
   reactPlugin,
   tailwindPlugin,
@@ -12,3 +12,5 @@ export default defineConfig({
   build: { outDir: '.vite/dist' },
   resolve: { alias },
 })
+
+console.log('Node ENV', process.env.NODE_ENV)
