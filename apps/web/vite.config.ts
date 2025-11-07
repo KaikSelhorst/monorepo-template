@@ -15,6 +15,7 @@ export default defineConfig({
 		viteReact(),
 		tailwindcss(),
 	],
+	build: {outDir:".vite/dist"},
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url)),
