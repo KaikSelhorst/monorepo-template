@@ -1,15 +1,21 @@
-# .github/workflows/ci.yml
 name: CI/CD
 
 on:
   push:
     branches: [main]
+    paths:
+      - "apps/web/**"
+      - "apps/api/**"
+      - "turbo.json"
+      - "package.json"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -20,22 +26,22 @@ jobs:
       - name: Build com Turborepo
         run: bunx turbo run build
 
-      # === FRONTEND: Vercel com Action oficial ===
-      - name: Deploy Frontend (Vercel)
-        if: contains(github.event.commits[0].modified, 'apps/web/')
-        uses: amondnet/vercel-action@v25
+      # DETECÇÃO PERFEITA DE MUDANÇAS
+      - uses: dorny/paths-filter@v2
+        id: changes
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: apps/web
-          prod: true
+          filters: |
+            app:
+              - 'apps/web/**'
+            api:
+              - 'apps/api/**'
 
-      # === BACKEND: Deploy manual (ex: VPS, Docker, Render) ===
-      # - name: Deploy Backend
-      #   if: contains(github.event.commits[0].modified, 'packages/api/')
-      #   run: |
-      #     rsync -avz packages/api/dist/ user@seu-servidor:/app/api/
-      #     ssh user@seu-servidor 'systemctl restart api.service'
-      #   env:
-      #     SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      # DEPLOY CONDICIONAL
+      - name: Deploy App (Vercel)
+        if: steps.changes.outputs.app == 'true'
+        run: |
+          cd apps/web
+          bunx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
