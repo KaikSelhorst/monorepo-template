@@ -3,10 +3,13 @@
 	"private": true,
 	"type": "module",
 	"workspaces": [
+		"apps/*",
 		"packages/*"
 	],
 	"scripts": {
-		"dev": "turbo run dev"
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"preview": "turbo run preview"
 	},
 	"devDependencies": {
 		"turbo": "2.6.0",

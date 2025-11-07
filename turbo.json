@@ -9,7 +9,7 @@
 			"dependsOn": ["^build"],
 			"outputs": [".vite/dist/**", "dist/**"]
 		},
-		"start": {
+		"preview": {
 			"dependsOn": ["build"],
 			"outputs": []
 		},

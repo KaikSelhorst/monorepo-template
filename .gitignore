@@ -8,6 +8,7 @@ node_modules
 out
 dist
 *.tgz
+dist-ssr
 
 # code coverage
 coverage
@@ -35,3 +36,9 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Vite
+count.txt
+.nitro
+.tanstack
+.wrangler
