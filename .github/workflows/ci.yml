@@ -22,13 +22,13 @@ jobs:
 
       # === FRONTEND: Vercel com Action oficial ===
       - name: Deploy Frontend (Vercel)
-        if: contains(github.event.commits[0].modified, 'packages/app/')
+        if: contains(github.event.commits[0].modified, 'apps/web/')
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: packages/app
+          working-directory: apps/web
           prod: true
 
       # === BACKEND: Deploy manual (ex: VPS, Docker, Render) ===
