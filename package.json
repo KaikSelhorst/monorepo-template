@@ -1,0 +1,9 @@
+{
+	"name": "zomboid-build",
+	"module": "index.ts",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"typescript": "5.9.3"
+	}
+}
