@@ -49,7 +49,7 @@ jobs:
         run: |
           cd apps/web
           bunx vercel link --yes --project zomboid-web --token=${{ secrets.VERCEL_TOKEN }}
-          bunx vercel build --yes --token=${{ secrets.VERCEL_TOKEN }}
+          bunx vercel build --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
           bunx vercel --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
