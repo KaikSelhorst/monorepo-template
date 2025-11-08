@@ -40,7 +40,6 @@ jobs:
       - name: Deploy App (Vercel)
         if: steps.changes.outputs.app == 'true'
         run: |
-          cd apps/web
           bunx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
