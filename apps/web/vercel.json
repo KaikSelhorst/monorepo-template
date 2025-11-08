@@ -1,0 +1,6 @@
+{
+  "installCommand": "bun install",
+  "buildCommand": "bunx turbo run build --filter=app",
+  "outputDirectory": ".vite/dist",
+  "framework": null
+}
