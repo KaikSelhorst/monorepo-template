@@ -8,6 +8,7 @@ on:
       - "apps/api/**"
       - "turbo.json"
       - "package.json"
+      - "packages/**"
 
 jobs:
   build-and-deploy:
@@ -23,24 +24,34 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Build com Turborepo
-        run: bunx turbo run build
-
-      # DETECÇÃO PERFEITA DE MUDANÇAS
-      - uses: dorny/paths-filter@v2
+      # DETECÇÃO DE MUDANÇAS
+      - uses: dorny/paths-filter@v3
         id: changes
         with:
           filters: |
-            app:
+            web:
               - 'apps/web/**'
             api:
               - 'apps/api/**'
 
-      # DEPLOY CONDICIONAL
-      - name: Deploy App (Vercel)
-        if: steps.changes.outputs.app == 'true'
+      # BUILD CONDICIONAL (só se necessário)
+      - name: Build Web (if changed)
+        if: steps.changes.outputs.web == 'true'
+        run: bunx turbo run build --filter=web
+
+      - name: Build API (if changed)
+        if: steps.changes.outputs.api == 'true'
+        run: bunx turbo run build --filter=api
+
+      # DEPLOY WEB (com --prebuilt)
+      - name: Deploy Web to Vercel
+        if: steps.changes.outputs.web == 'true'
         run: |
-          bunx vercel --cwd=apps/web --prod --token=${{ secrets.VERCEL_TOKEN }}
+          cd apps/web
+          bunx vercel --prod --prebuilt \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --org-id=${{ secrets.VERCEL_ORG_ID }} \
+            --project-id=${{ secrets.VERCEL_PROJECT_ID }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
