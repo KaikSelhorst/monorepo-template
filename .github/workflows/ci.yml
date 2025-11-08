@@ -24,7 +24,6 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      # DETECÇÃO DE MUDANÇAS
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -34,7 +33,6 @@ jobs:
             api:
               - 'apps/api/**'
 
-      # DEPLOY WEB (com --prebuilt)
       - name: Deploy Web to Vercel
         if: steps.changes.outputs.web == 'true'
         run: |
