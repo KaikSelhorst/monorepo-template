@@ -5,5 +5,11 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  return <div>Bseven Template</div>
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <hgroup>
+        <h1 className="text-2xl">Template</h1>
+      </hgroup>
+    </div>
+  )
 }
