@@ -54,19 +54,15 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
-          # Instala flyctl
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
 
-          # Cria app se não existir (falha se sem billing — configure no dashboard)
-          if ! fly apps list -t $FLY_API_TOKEN | grep -q "zomboid-api"; then
-            fly apps create zomboid-api --org personal -t $FLY_API_TOKEN
+          if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "zomboid-api"; then
+            fly apps create zomboid-api --org personal -t "$FLY_API_TOKEN"
           fi
 
-          # Deploy com Docker (região via fly.toml ou --regions)
-          fly deploy -t $FLY_API_TOKEN
+          fly deploy -t "$FLY_API_TOKEN"
 
-          # Health check (6 tentativas)
           for i in {1..6}; do
             sleep 10
             if curl -f https://zomboid-api.fly.dev/health; then
@@ -89,13 +85,13 @@ jobs:
           export PATH="$HOME/.fly/bin:$PATH"
 
           # Pega versão anterior
-          PREV_VERSION=$(fly releases --app zomboid-api --json -t $FLY_API_TOKEN | jq -r '.[1].ImageRef // empty')
+          PREV_VERSION=$(fly releases --app zomboid-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
           if [ -z "$PREV_VERSION" ]; then
             echo "Nenhuma versão anterior!"
             exit 1
           fi
 
-          echo "Rolando back para v$PREV_VERSION"
+          echo "Rolando back para versao $PREV_VERSION"
           fly deploy \
             --image $PREV_VERSION \
             --strategy immediate
