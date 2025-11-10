@@ -46,3 +46,6 @@ count.txt
 .nitro
 .tanstack
 .wrangler
+
+# Api
+api.exe
