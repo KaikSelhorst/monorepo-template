@@ -13,16 +13,20 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2 # Atualizado
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - uses: dorny/paths-filter@v3
         id: changes
@@ -33,40 +37,53 @@ jobs:
             api:
               - 'apps/api/**'
 
+      # =============== DEPLOY WEB (Vercel) ===============
       - name: Deploy Web to Vercel
         if: steps.changes.outputs.web == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/web
-          bunx vercel link --yes --project zomboid-web --token=${{ secrets.VERCEL_TOKEN }}
-          bunx vercel build --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-          bunx vercel --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          bunx vercel link --yes --project zomboid-web --token=$VERCEL_TOKEN
+          bunx vercel build --prod --yes --token=$VERCEL_TOKEN
+          bunx vercel deploy --prod --prebuilt --token=$VERCEL_TOKEN
+
+      # =============== DEPLOY API (Fly.io + Docker + --compile) ===============
       - name: Deploy API to Fly.io
         if: steps.changes.outputs.api == 'true'
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
+          # Instala flyctl
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
-          echo "$FLY_API_TOKEN" | fly auth login --interactive=false
 
-          fly apps create zomboid-api --org personal || true
+          # Auth via token (sem browser)
+          fly auth login --token $FLY_API_TOKEN
 
-          # Deploy com Docker (build remoto)
+          # Cria app se não existir (falha se sem billing — configure no dashboard)
+          if ! fly apps list | grep -q "zomboid-api"; then
+            fly apps create zomboid-api --org personal
+          fi
+
+          # Deploy com Docker (região via fly.toml ou --regions)
           fly deploy \
             --app zomboid-api \
-            --region gru \
+            --regions gru \  # Plural! Ou remova se fly.toml define
             --strategy immediate \
             --ha=false \
             --vm-size shared-cpu-1x \
-            --memory 256
+            --memory 256 \
+            --yes  # Aceita confirmações
 
-          # Health check
+          # Health check (6 tentativas)
           for i in {1..6}; do
             sleep 10
             if curl -f https://zomboid-api.fly.dev/health; then
               echo "API OK!"
               exit 0
             fi
+            echo "Tentativa $i/6..."
           done
 
           echo "Deploy falhou!"
@@ -80,8 +97,9 @@ jobs:
         run: |
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
-          echo "$FLY_API_TOKEN" | fly auth login --interactive=false
+          fly auth login --token $FLY_API_TOKEN
 
+          # Pega versão anterior
           PREV_VERSION=$(fly releases list --app zomboid-api --json | jq -r '.[1].version // empty')
           if [ -z "$PREV_VERSION" ]; then
             echo "Nenhuma versão anterior!"
@@ -97,3 +115,16 @@ jobs:
 
           sleep 10
           curl -f https://zomboid-api.fly.dev/health || exit 1
+
+      # =============== RESUMO ===============
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Deploy Status" >> $GITHUB_STEP_SUMMARY
+          if [ ${{ job.status }} = "success" ]; then
+            echo "Sucesso!" >> $GITHUB_STEP_SUMMARY
+            [ "${{ steps.changes.outputs.web }}" = "true" ] && echo "- Web: https://zomboid-web.vercel.app" >> $GITHUB_STEP_SUMMARY
+            [ "${{ steps.changes.outputs.api }}" = "true" ] && echo "- API: https://zomboid-api.fly.dev" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Falha! Rollback executado." >> $GITHUB_STEP_SUMMARY
+          fi
