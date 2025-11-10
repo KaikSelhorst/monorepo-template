@@ -59,7 +59,7 @@ jobs:
           export PATH="$HOME/.fly/bin:$PATH"
 
           # Auth via token (sem browser)
-          fly auth login --token $FLY_API_TOKEN
+          fly auth login -t $FLY_API_TOKEN
 
           # Cria app se não existir (falha se sem billing — configure no dashboard)
           if ! fly apps list | grep -q "zomboid-api"; then
@@ -97,7 +97,7 @@ jobs:
         run: |
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
-          fly auth login --token $FLY_API_TOKEN
+          fly auth login -t $FLY_API_TOKEN
 
           # Pega versão anterior
           PREV_VERSION=$(fly releases list --app zomboid-api --json | jq -r '.[1].version // empty')
