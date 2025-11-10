@@ -58,23 +58,13 @@ jobs:
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
 
-          # Auth via token (sem browser)
-          fly auth login -t $FLY_API_TOKEN
-
           # Cria app se não existir (falha se sem billing — configure no dashboard)
-          if ! fly apps list | grep -q "zomboid-api"; then
-            fly apps create zomboid-api --org personal
+          if ! fly apps list -t $FLY_API_TOKEN | grep -q "zomboid-api"; then
+            fly apps create zomboid-api --org personal -t $FLY_API_TOKEN
           fi
 
           # Deploy com Docker (região via fly.toml ou --regions)
-          fly deploy \
-            --app zomboid-api \
-            --regions gru \  # Plural! Ou remova se fly.toml define
-            --strategy immediate \
-            --ha=false \
-            --vm-size shared-cpu-1x \
-            --memory 256 \
-            --yes  # Aceita confirmações
+          fly deploy -t $FLY_API_TOKEN
 
           # Health check (6 tentativas)
           for i in {1..6}; do
@@ -97,10 +87,9 @@ jobs:
         run: |
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
-          fly auth login -t $FLY_API_TOKEN
 
           # Pega versão anterior
-          PREV_VERSION=$(fly releases list --app zomboid-api --json | jq -r '.[1].version // empty')
+          PREV_VERSION=$(fly releases --app zomboid-api --json -t $FLY_API_TOKEN | jq -r '.[1].ImageRef // empty')
           if [ -z "$PREV_VERSION" ]; then
             echo "Nenhuma versão anterior!"
             exit 1
@@ -108,23 +97,8 @@ jobs:
 
           echo "Rolando back para v$PREV_VERSION"
           fly deploy \
-            --app zomboid-api \
-            --image registry.fly.io/zomboid-api:$PREV_VERSION \
-            --strategy immediate \
-            --yes
+            --image $PREV_VERSION \
+            --strategy immediate
 
           sleep 10
           curl -f https://zomboid-api.fly.dev/health || exit 1
-
-      # =============== RESUMO ===============
-      - name: Summary
-        if: always()
-        run: |
-          echo "## Deploy Status" >> $GITHUB_STEP_SUMMARY
-          if [ ${{ job.status }} = "success" ]; then
-            echo "Sucesso!" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.changes.outputs.web }}" = "true" ] && echo "- Web: https://zomboid-web.vercel.app" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.changes.outputs.api }}" = "true" ] && echo "- API: https://zomboid-api.fly.dev" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "Falha! Rollback executado." >> $GITHUB_STEP_SUMMARY
-          fi
