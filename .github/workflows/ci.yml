@@ -40,3 +40,60 @@ jobs:
           bunx vercel link --yes --project zomboid-web --token=${{ secrets.VERCEL_TOKEN }}
           bunx vercel build --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
           bunx vercel --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy API to Fly.io
+        if: steps.changes.outputs.api == 'true'
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          export PATH="$HOME/.fly/bin:$PATH"
+          echo "$FLY_API_TOKEN" | fly auth login --interactive=false
+
+          fly apps create zomboid-api --org personal || true
+
+          # Deploy com Docker (build remoto)
+          fly deploy \
+            --app zomboid-api \
+            --region gru \
+            --strategy immediate \
+            --ha=false \
+            --vm-size shared-cpu-1x \
+            --memory 256
+
+          # Health check
+          for i in {1..6}; do
+            sleep 10
+            if curl -f https://zomboid-api.fly.dev/health; then
+              echo "API OK!"
+              exit 0
+            fi
+          done
+
+          echo "Deploy falhou!"
+          exit 1
+
+      # =============== ROLLBACK AUTOMÁTICO ===============
+      - name: Rollback API
+        if: steps.changes.outputs.api == 'true' && failure()
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          export PATH="$HOME/.fly/bin:$PATH"
+          echo "$FLY_API_TOKEN" | fly auth login --interactive=false
+
+          PREV_VERSION=$(fly releases list --app zomboid-api --json | jq -r '.[1].version // empty')
+          if [ -z "$PREV_VERSION" ]; then
+            echo "Nenhuma versão anterior!"
+            exit 1
+          fi
+
+          echo "Rolando back para v$PREV_VERSION"
+          fly deploy \
+            --app zomboid-api \
+            --image registry.fly.io/zomboid-api:$PREV_VERSION \
+            --strategy immediate \
+            --yes
+
+          sleep 10
+          curl -f https://zomboid-api.fly.dev/health || exit 1
