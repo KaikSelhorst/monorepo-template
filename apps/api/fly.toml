@@ -1,27 +1,32 @@
-app = "zomboid-api"
-primary_region = "gru"
+# fly.toml app configuration file generated for zomboid-api on 2025-11-10T11:20:58-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'zomboid-api'
+primary_region = 'gru'
 
 [build]
-  dockerfile = "apps/api/Dockerfile"
-
-[vm]
-  memory = "256mb"
-  cpu_kind = "shared"
-  cpus = 1
+  dockerfile = './Dockerfile'
 
 [[services]]
+  protocol = 'tcp'
   internal_port = 3000
-  protocol = "tcp"
 
   [[services.ports]]
-    handlers = ["http"]
     port = 80
+    handlers = ['http']
 
   [[services.ports]]
-    handlers = ["tls", "http"]
     port = 443
+    handlers = ['tls', 'http']
 
   [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    timeout = "2s"
+    interval = '15s'
+    timeout = '2s'
+    grace_period = '1s'
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
