@@ -19,7 +19,7 @@ RUN bun build ./src/index.ts \
     --outfile /app/zomboid-api
 
 # ETAPA FINAL: IMAGEM MINIMALISTA
-FROM alpine:latest
+FROM oven/bun:1-alpine
 
 WORKDIR /app
 
