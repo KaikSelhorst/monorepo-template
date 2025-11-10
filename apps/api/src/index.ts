@@ -2,7 +2,7 @@ import { Elysia } from 'elysia'
 
 const app = new Elysia()
   .get('/', () => ({
-    message: 'Hello Zomboid API with Elysia 🦊',
+    message: 'Hello Zomboid API with Elysia 🦊🦊',
   }))
   .get('/health', () => ({
     message: 'OK',
