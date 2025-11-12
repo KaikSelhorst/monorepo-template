@@ -3,7 +3,8 @@
   "version": "1.0.50",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "build": "bun build src/index.ts --compile --outfile api",
+    "build": "bun build src/index.ts --compile --outfile=api",
+    "build:alpine": "bun run build --minify --sourcemap --target=bun-linux-x64-musl",
     "preview": "./api"
   },
   "dependencies": {
