@@ -7,10 +7,11 @@
     "preview": "./api"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "@org/validation": "workspace:*"
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "bun-types": "latest",
+    "@org/tsconfig": "workspace:*"
+  }
 }
