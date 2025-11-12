@@ -1,8 +1,9 @@
+import './env'
 import { Elysia } from 'elysia'
 
 const app = new Elysia()
   .get('/', () => ({
-    message: 'Hello Zomboid API with Elysia 🦊🦊🦊' + process.env.TEST_SECRET,
+    message: 'Hello Zomboid API with Elysia 🦊🦊🦊',
   }))
   .get('/health', () => ({
     message: 'OK',
