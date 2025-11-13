@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "bun drizzle-kit studio --port=7000 --config=./drizzle.config.ts",
-    "preview": "bun drizzle-kit studio --port=7000",
+    "preview": "bun drizzle-kit studio --port=7000 --config=./drizzle.config.ts",
     "db:generate": "drizzle-kit generate --config=./drizzle.config.ts",
     "db:migrate": "bun run ./migrate.ts"
   },
