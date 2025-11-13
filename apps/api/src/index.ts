@@ -1,4 +1,4 @@
-import './env'
+import '@/env'
 import { cacheClient } from '@org/cache'
 import { database } from '@org/database'
 
