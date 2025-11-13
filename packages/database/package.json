@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@org/validation": "workspace:*",
-    "@org/tsconfig": "workspace:*",
     "drizzle-orm": "0.44.7"
   },
   "devDependencies": {
+    "@org/tsconfig": "workspace:*",
     "drizzle-kit": "0.31.6",
     "pg": "8.16.3"
   }

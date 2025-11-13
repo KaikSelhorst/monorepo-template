@@ -1,11 +1,11 @@
 import { migrate } from 'drizzle-orm/bun-sql/migrator'
-import { db } from '.'
+import { database } from '.'
 
 async function main() {
   console.log('Starting database migration...')
 
   try {
-    await migrate(db, { migrationsFolder: './migrations' })
+    await migrate(database, { migrationsFolder: './migrations' })
     console.log('Migration completed successfully.')
   } catch (error: unknown) {
     console.error('Migration failed!')

@@ -4,4 +4,4 @@ import { env } from '@/env'
 import * as schemas from './schemas'
 
 const client = new SQL(env.DATABASE_URL)
-export const db = drizzle({ client, schema: schemas })
+export const database = drizzle({ client, schema: schemas })
