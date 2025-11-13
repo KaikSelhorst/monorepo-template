@@ -13,6 +13,7 @@
   "dependencies": {
     "@org/database": "workspace:*",
     "@org/validation": "workspace:*",
+    "@org/cache": "workspace:*",
     "elysia": "latest"
   },
   "devDependencies": {
