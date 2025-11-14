@@ -11,7 +11,7 @@ export const auth = betterAuth({
   database: drizzleAdapter(database, { provider: 'pg', usePlural: true }),
   trustedOrigins: env.ORIGIN_ALLOWED,
 
-  advanced: { generateId: false },
+  advanced: { database: { generateId: false } },
   secondaryStorage: {
     delete: async (key) => String(await cacheClient.del(key)),
     get: cacheClient.get,
@@ -19,4 +19,11 @@ export const auth = betterAuth({
   },
 
   session: { cookieCache: { enabled: true, maxAge: 60 * 5 } },
+
+  socialProviders: {
+    discord: {
+      clientId: env.DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
+    },
+  },
 })
