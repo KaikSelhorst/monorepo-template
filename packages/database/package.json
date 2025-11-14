@@ -1,0 +1,23 @@
+{
+  "name": "@org/database",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun docker:up && bun drizzle-kit studio --port=7000 --config=./drizzle.config.ts",
+    "preview": "bun docker:up && bun drizzle-kit studio --port=7000 --config=./drizzle.config.ts",
+    "db:generate": "drizzle-kit generate --config=./drizzle.config.ts",
+    "db:migrate": "bun run ./migrate.ts",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:kill": "docker compose down --volumes --remove-orphans"
+  },
+  "dependencies": {
+    "@org/validation": "workspace:*",
+    "drizzle-orm": "0.44.7"
+  },
+  "devDependencies": {
+    "@org/tsconfig": "workspace:*",
+    "drizzle-kit": "0.31.6",
+    "pg": "8.16.3"
+  }
+}

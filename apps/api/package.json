@@ -8,11 +8,14 @@
     "preview": "./api"
   },
   "dependencies": {
-    "elysia": "latest",
-    "@org/validation": "workspace:*"
+    "@org/database": "workspace:*",
+    "@org/validation": "workspace:*",
+    "@org/cache": "workspace:*",
+    "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest",
-    "@org/tsconfig": "workspace:*"
+    "@org/tsconfig": "workspace:*",
+    "@types/bun": "1.3.2",
+    "bun-types": "latest"
   }
 }

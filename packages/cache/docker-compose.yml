@@ -1,0 +1,17 @@
+# I use high ports to avoid easy conflicts with other
+# projects when running this docker-compose.
+services:
+  redis:
+    image: redis:7
+    container_name: redis_zomboid_api
+    restart: always
+    ports:
+      - "63790:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
