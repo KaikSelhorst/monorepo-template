@@ -5,10 +5,7 @@
     "dev": "bun run --watch src/index.ts",
     "build": "bun build src/index.ts --compile --outfile=api",
     "build:alpine": "bun run build --minify --sourcemap --target=bun-linux-x64-musl",
-    "preview": "./api",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:kill": "docker compose down --volumes --remove-orphans"
+    "preview": "./api"
   },
   "dependencies": {
     "@org/database": "workspace:*",
