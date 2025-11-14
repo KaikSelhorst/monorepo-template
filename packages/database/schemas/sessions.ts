@@ -1,8 +1,8 @@
 import { sql } from 'drizzle-orm'
 import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
-import { usersTable } from './users'
+import { users } from './users'
 
-export const sessionsTable = pgTable('sessions', {
+export const sessions = pgTable('sessions', {
   id: uuid('id').default(sql`uuidv7()`).primaryKey(),
   expiresAt: timestamp('expires_at').notNull(),
   token: text('token').notNull().unique(),
@@ -14,7 +14,7 @@ export const sessionsTable = pgTable('sessions', {
     .notNull(),
   ipAddress: text('ip_address'),
   userAgent: text('user_agent'),
-  userId: text('user_id')
+  userId: uuid('user_id')
     .notNull()
-    .references(() => usersTable.id, { onDelete: 'cascade' }),
+    .references(() => users.id, { onDelete: 'cascade' }),
 })
