@@ -1,12 +1,10 @@
 import '@/env'
-import { auth } from '@org/authentication'
 import { cacheClient } from '@org/cache'
 import { database } from '@org/database'
 
-import { Elysia } from 'elysia'
+import { server } from './infra/http/server'
 
-const app = new Elysia()
-  .mount(auth.handler)
+const app = server
   .get('/', async () => {
     try {
       const cachedUsers = await cacheClient.get('users')
@@ -15,7 +13,7 @@ const app = new Elysia()
         return JSON.parse(cachedUsers)
       }
 
-      const users = await database.query.usersTable.findMany()
+      const users = await database.query.users.findMany()
 
       if (!cachedUsers) {
         await cacheClient.set('users', JSON.stringify(users), 'EX', 60)
@@ -30,6 +28,6 @@ const app = new Elysia()
   .get('/health', () => ({
     message: 'OK',
   }))
-  .listen(3000)
+  .listen(3001)
 
 console.log(`🦊 Elysia is running at ${app.server?.url}`)
