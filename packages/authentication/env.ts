@@ -1,7 +1,8 @@
 import { z } from '@org/validation/zod'
 
-// Traduzir para plural
 export const schema = z.object({
+  DISCORD_CLIENT_ID: z.string().min(1),
+  DISCORD_CLIENT_SECRET: z.string().min(1),
   ORIGIN_ALLOWED: z
     .string()
     .transform((value) => value.split(',').map((origin) => origin.trim())),

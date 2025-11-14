@@ -1,3 +1,8 @@
 import { createAuthClient } from 'better-auth/react'
 
-export const auth = createAuthClient()
+export function generateAuthClient(baseURL: string) {
+  return createAuthClient({
+    baseURL: baseURL,
+    basePath: '/auth',
+  })
+}
