@@ -1,10 +1,12 @@
 import '@/env'
+import { auth } from '@org/authentication'
 import { cacheClient } from '@org/cache'
 import { database } from '@org/database'
 
 import { Elysia } from 'elysia'
 
 const app = new Elysia()
+  .mount(auth.handler)
   .get('/', async () => {
     try {
       const cachedUsers = await cacheClient.get('users')
