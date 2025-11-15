@@ -1,4 +1,4 @@
-import { cacheClient } from '@org/cache'
+// import { cacheClient } from '@org/cache'
 import { database } from '@org/database'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
@@ -12,11 +12,11 @@ export const auth = betterAuth({
   trustedOrigins: env.ORIGIN_ALLOWED,
 
   advanced: { database: { generateId: false } },
-  secondaryStorage: {
-    delete: async (key) => String(await cacheClient.del(key)),
-    get: cacheClient.get,
-    set: cacheClient.set,
-  },
+  // secondaryStorage: {
+  //   delete: async (key) => String(await cacheClient.del(key)),
+  //   get: cacheClient.get,
+  //   set: cacheClient.set,
+  // },
 
   session: { cookieCache: { enabled: true, maxAge: 60 * 5 } },
 
