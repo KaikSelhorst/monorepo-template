@@ -1,5 +1,5 @@
 import openapi from '@elysiajs/openapi'
-import { betterAuthOpenAPI } from '@org/authentication/openapi'
+import { betterAuthOpenAPI } from '@org/auth/openapi'
 import { Elysia } from 'elysia'
 import z from 'zod'
 

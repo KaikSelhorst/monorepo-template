@@ -1,5 +1,5 @@
 {
-  "name": "@org/authentication",
+  "name": "@org/auth",
   "private": true,
   "dependencies": {
     "@org/cache": "workspace:*",

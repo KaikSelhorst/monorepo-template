@@ -10,7 +10,7 @@
   "dependencies": {
     "@elysiajs/cors": "1.4.0",
     "@elysiajs/openapi": "1.4.11",
-    "@org/authentication": "workspace:*",
+    "@org/auth": "workspace:*",
     "@org/cache": "workspace:*",
     "@org/database": "workspace:*",
     "@org/validation": "workspace:*",

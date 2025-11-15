@@ -1,4 +1,4 @@
-import { auth } from '@org/authentication'
+import { auth } from '@org/auth'
 import { Elysia } from 'elysia'
 
 export const betterAuthPlugin = new Elysia({ name: 'better-auth' })
