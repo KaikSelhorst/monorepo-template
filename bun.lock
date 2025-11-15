@@ -16,7 +16,7 @@
       "dependencies": {
         "@elysiajs/cors": "1.4.0",
         "@elysiajs/openapi": "1.4.11",
-        "@org/authentication": "workspace:*",
+        "@org/auth": "workspace:*",
         "@org/cache": "workspace:*",
         "@org/database": "workspace:*",
         "@org/validation": "workspace:*",
@@ -31,6 +31,8 @@
     "apps/web": {
       "name": "web",
       "dependencies": {
+        "@org/auth": "workspace:*",
+        "@org/validation": "workspace:*",
         "@tailwindcss/vite": "^4.0.6",
         "@tanstack/devtools-vite": "0.3.11",
         "@tanstack/react-devtools": "0.8.1",
@@ -53,8 +55,8 @@
         "vite": "7.2.2",
       },
     },
-    "packages/authentication": {
-      "name": "@org/authentication",
+    "packages/auth": {
+      "name": "@org/auth",
       "dependencies": {
         "@org/cache": "workspace:*",
         "@org/database": "workspace:*",
@@ -288,7 +290,7 @@
 
     "@noble/hashes": ["@noble/hashes@2.0.1", "", {}, "sha512-XlOlEbQcE9fmuXxrVTXCTlG2nlRXa9Rj3rr5Ue/+tX+nmkgbX720YHh0VR3hBF9xDvwnb8D2shVGOwNx+ulArw=="],
 
-    "@org/authentication": ["@org/authentication@workspace:packages/authentication"],
+    "@org/auth": ["@org/auth@workspace:packages/auth"],
 
     "@org/cache": ["@org/cache@workspace:packages/cache"],
 
