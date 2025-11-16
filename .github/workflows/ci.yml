@@ -1,14 +1,8 @@
 name: CI/CD
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "apps/web/**"
-      - "apps/api/**"
-      - "turbo.json"
-      - "package.json"
-      - "packages/**"
+  release:
+    types: [published] # Runs only when a release is published
 
 jobs:
   build-and-deploy:
@@ -23,7 +17,7 @@ jobs:
           fetch-depth: 2
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2 # Atualizado
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -59,27 +53,30 @@ jobs:
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
 
+          # Create app if it doesn't exist
           if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "zomboid-api"; then
             fly apps create zomboid-api --org personal -t "$FLY_API_TOKEN"
           fi
 
+          # Deploy
           fly deploy -t "$FLY_API_TOKEN"
 
+          # Health check with retries
           for i in {1..6}; do
             sleep 10
             if curl -f https://zomboid-api.fly.dev/health; then
-              echo "API OK!"
+              echo "API is healthy!"
               exit 0
             fi
-            echo "Tentativa $i/6..."
+            echo "Attempt $i/6..."
           done
 
-          echo "Deploy falhou!"
+          echo "Deployment failed after 6 attempts!"
           exit 1
 
-      # =============== ROLLBACK AUTOMÁTICO ===============
-      - name: Rollback API
-        if: steps.changes.outputs.api == 'true' && failure()
+      # =============== AUTOMATIC ROLLBACK ===============
+      - name: Rollback API on Failure
+        if: failure() && steps.changes.outputs.api == 'true'
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
@@ -87,17 +84,19 @@ jobs:
           curl -L https://fly.io/install.sh | sh
           export PATH="$HOME/.fly/bin:$PATH"
 
-          # Pega versão anterior
+          # Get previous successful release image
           PREV_VERSION=$(fly releases --app zomboid-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
+
           if [ -z "$PREV_VERSION" ]; then
-            echo "Nenhuma versão anterior!"
+            echo "No previous version found!"
             exit 1
           fi
 
-          echo "Rolando back para versao $PREV_VERSION"
+          echo "Rolling back to version: $PREV_VERSION"
           fly deploy \
-            --image $PREV_VERSION \
-            --strategy immediate
+            --image "$PREV_VERSION" \
+            --strategy immediate \
+            -t "$FLY_API_TOKEN"
 
           sleep 10
           curl -f https://zomboid-api.fly.dev/health || exit 1
