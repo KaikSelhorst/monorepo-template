@@ -1,0 +1,13 @@
+{
+  "name": "@org/auth",
+  "private": true,
+  "dependencies": {
+    "@org/cache": "workspace:*",
+    "@org/database": "workspace:*",
+    "@org/validation": "workspace:*",
+    "better-auth": "1.3.34"
+  },
+  "devDependencies": {
+    "@org/tsconfig": "workspace:*"
+  }
+}
