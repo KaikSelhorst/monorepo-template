@@ -1,0 +1,14 @@
+{
+  "name": "@org/design-system",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@org/tsconfig": "workspace:*",
+    "@types/react": "19.2.5",
+    "@types/react-dom": "19.2.3"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}
