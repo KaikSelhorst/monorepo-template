@@ -9,8 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@org/validation": "workspace:*",
     "@org/auth": "workspace:*",
+    "@org/design-system": "workspace:*",
+    "@org/validation": "workspace:*",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/devtools-vite": "0.3.11",
     "@tanstack/react-devtools": "0.8.1",
