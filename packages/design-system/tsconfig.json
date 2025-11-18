@@ -3,6 +3,6 @@
   "extends": "@org/tsconfig/vite.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": { "@org/design-system/*": ["./*"] }
   }
 }
