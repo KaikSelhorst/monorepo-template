@@ -1,5 +1,5 @@
 import { Button } from '@org/design-system/components/ui/button'
-import { Theme } from '@org/design-system/components/ui/icons'
+import { Theme, User } from '@org/design-system/components/ui/icons'
 import { useTheme } from '@org/design-system/providers'
 import { auth } from '@/lib/auth'
 
@@ -7,7 +7,7 @@ export function SiteHeader() {
   console.log('Header')
   return (
     <header className="container flex justify-end items-center my-4">
-      <nav className="flex gap-3">
+      <nav className="flex gap-3 items-center">
         <ThemeButton />
         <UserMenu />
       </nav>
@@ -44,5 +44,10 @@ function UserMenu() {
     )
   }
 
-  return <Button onClick={() => auth.signOut()}>Sign Out</Button>
+  return (
+    <Button onClick={() => auth.signOut()}>
+      <User />
+      Account
+    </Button>
+  )
 }
