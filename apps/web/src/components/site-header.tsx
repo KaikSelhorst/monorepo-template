@@ -1,5 +1,6 @@
 import { Button } from '@org/design-system/components/ui/button'
-import { Theme, User } from '@org/design-system/components/ui/icons'
+import { LogOut, Theme } from '@org/design-system/components/ui/icons'
+
 import { useTheme } from '@org/design-system/providers'
 import { auth } from '@/lib/auth'
 
@@ -46,8 +47,8 @@ function UserMenu() {
 
   return (
     <Button onClick={() => auth.signOut()}>
-      <User />
-      Account
+      <LogOut />
+      Logout
     </Button>
   )
 }
