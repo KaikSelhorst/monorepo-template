@@ -5,7 +5,6 @@ import { useTheme } from '@org/design-system/providers'
 import { auth } from '@/lib/auth'
 
 export function SiteHeader() {
-  console.log('Header')
   return (
     <header className="container flex justify-end items-center my-4">
       <nav className="flex gap-3 items-center">
