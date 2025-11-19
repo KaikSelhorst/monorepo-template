@@ -3,16 +3,16 @@
 services:
   postgres:
     image: postgres:18-alpine
-    container_name: postgres_zomboid_api
+    container_name: postgres_monorepo_template
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: zomboid_api
+      POSTGRES_DB: monorepo_template
     ports:
       - "54320:5432"
     volumes:
-          - postgres_data:/var/lib/postgresql
+      - postgres_data:/var/lib/postgresql
 
 volumes:
   postgres_data:
