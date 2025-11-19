@@ -9,18 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@org/validation": "workspace:*",
     "@org/auth": "workspace:*",
+    "@org/design-system": "workspace:*",
+    "@org/validation": "workspace:*",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/devtools-vite": "0.3.11",
     "@tanstack/react-devtools": "0.8.1",
     "@tanstack/react-router": "1.134.15",
     "@tanstack/react-router-devtools": "1.134.15",
     "@tanstack/router-plugin": "1.134.15",
-    "lucide-react": "0.553.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "tailwindcss": "4.1.17"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",

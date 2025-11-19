@@ -6,6 +6,10 @@ import viteReact from '@vitejs/plugin-react'
 const tanstackRouterPlugin = tanstackRouter({
   target: 'react',
   autoCodeSplitting: true,
+  generatedRouteTree: './src/routeTree.gen.ts',
+  routesDirectory: './src/pages',
+  routeToken: 'layout',
+  quoteStyle: 'single',
 })
 
 const tanstackDevTools = devtools({ removeDevtoolsOnBuild: true })

@@ -1,8 +1,8 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "../../packages/**/*"],
   "extends": "@org/tsconfig/vite.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": { "@/*": ["./src/*"], "@org/*": ["../../packages/*"] }
   }
 }
