@@ -3,7 +3,7 @@
 services:
   redis:
     image: redis:7
-    container_name: redis_zomboid_api
+    container_name: redis_monorepo_template
     restart: always
     ports:
       - "63790:6379"
@@ -11,7 +11,5 @@ services:
       - redis_data:/data
 
 volumes:
-  postgres_data:
-    driver: local
   redis_data:
     driver: local
