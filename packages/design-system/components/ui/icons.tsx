@@ -1,6 +1,6 @@
 import type { LucideProps } from 'lucide-react'
 
-export { Moon, Star, Sun } from 'lucide-react'
+export { Moon, Star, Sun, User } from 'lucide-react'
 
 export const Theme = (props: LucideProps) => (
   <svg
