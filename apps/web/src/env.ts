@@ -1,5 +1,5 @@
 import { z } from '@org/validation/zod'
 
-const envSchema = z.object({})
+const envSchema = z.object({ VITE_API_URL: z.url() })
 
-export const env = envSchema.parse(process.env)
+export const env = envSchema.parse(import.meta.env)
