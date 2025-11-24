@@ -27,6 +27,12 @@ function ThemeButton() {
 function UserMenu() {
   const { isPending, data } = auth.useSession()
 
+  // This variable was added because I don't have money to keep a backend just to
+  // show a template.
+  // Note: remove this condition when you are using this template
+  const disableBecauseImPoor = import.meta.env.PROD
+  if (disableBecauseImPoor) return null
+
   if (isPending) return null
 
   if (!data) {
