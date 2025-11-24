@@ -7,7 +7,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".vite/dist/**", "dist/**"]
+      "outputs": [".vite/dist/**", "api.exe"]
     },
     "preview": {
       "dependsOn": ["build"],
