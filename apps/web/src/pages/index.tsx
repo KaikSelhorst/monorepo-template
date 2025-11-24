@@ -4,6 +4,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
+  head: async () => ({
+    meta: [
+      { title: 'Elysia + Tanstack Router' },
+      { name: 'description', content: 'Elysia + Tanstack Router' },
+    ],
+  }),
 })
 
 function RouteComponent() {
