@@ -10,52 +10,126 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 
 ## 🚀 Main Technologies
 
-### Runtime & Build Tools
-
-| Title | | |
-|------|-|-|
-| [Bun](https://bun.sh/) | High-performance JavaScript/TypeScript runtime | [Docs](https://bun.sh/docs) |
-| [Turbo](https://turbo.build/) | Build system for monorepos | [Docs](https://turbo.build/repo/docs) |
-
-### Frontend
-
-| Title | | |
-|------|-|-|
-| [React](https://react.dev/) | Library for user interfaces | [Docs](https://react.dev/) |
-| [TanStack Router](https://tanstack.com/router) | Type-safe routing | [Docs](https://tanstack.com/router/latest) |
-| [TanStack Query](https://tanstack.com/query) | Server state management | [Docs](https://tanstack.com/query/latest) |
-| [Vite](https://vitejs.dev/) | Build tool and dev server | [Docs](https://vitejs.dev/) |
-| [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework | [Docs](https://tailwindcss.com/docs) |
-
-### Backend
-
-| Title | | |
-|------|-|-|
-| [Elysia](https://elysiajs.com/) | Fast TypeScript web framework | [Docs](https://elysiajs.com/) |
-| [Better Auth](https://www.better-auth.com/) | Authentication system | [Docs](https://www.better-auth.com/docs) |
-
-### Database
-
-| Title | | |
-|------|-|-|
-| [Drizzle ORM](https://orm.drizzle.team/) | TypeScript ORM for PostgreSQL | [Docs](https://orm.drizzle.team/) |
-| [PostgreSQL](https://www.postgresql.org/) | Relational database | [Docs](https://www.postgresql.org/docs/) |
-| [Redis](https://redis.io/) | Cache and in-memory storage | [Docs](https://redis.io/docs/) |
-
-### DevOps & Deploy
-
-| Title | | |
-|------|-|-|
-| [Vercel](https://vercel.com/) | Frontend deployment | [Docs](https://vercel.com/docs) |
-| [Fly.io](https://fly.io/) | Backend deployment | [Docs](https://fly.io/docs) |
-| [GitHub Actions](https://docs.github.com/en/actions) | CI/CD | [Docs](https://docs.github.com/en/actions) |
-
-### Code Quality
-
-| Title | | |
-|------|-|-|
-| [Biome](https://biomejs.dev/) | Linter and formatter | [Docs](https://biomejs.dev/) |
-| [TypeScript](https://www.typescriptlang.org/) | JavaScript superset with types | [Docs](https://www.typescriptlang.org/docs/) |
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2"><strong>Runtime & Build Tools</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://bun.sh/">Bun</a></td>
+<td>High-performance JavaScript/TypeScript runtime</td>
+<td><a href="https://bun.sh/docs">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://turbo.build/">Turbo</a></td>
+<td>Build system for monorepos</td>
+<td><a href="https://turbo.build/repo/docs">Docs</a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>Frontend</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://react.dev/">React</a></td>
+<td>Library for user interfaces</td>
+<td><a href="https://react.dev/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://tanstack.com/router">TanStack Router</a></td>
+<td>Type-safe routing</td>
+<td><a href="https://tanstack.com/router/latest">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://tanstack.com/query">TanStack Query</a></td>
+<td>Server state management</td>
+<td><a href="https://tanstack.com/query/latest">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://vitejs.dev/">Vite</a></td>
+<td>Build tool and dev server</td>
+<td><a href="https://vitejs.dev/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://tailwindcss.com/">Tailwind CSS</a></td>
+<td>Utility-first CSS framework</td>
+<td><a href="https://tailwindcss.com/docs">Docs</a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>Backend</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://elysiajs.com/">Elysia</a></td>
+<td>Fast TypeScript web framework</td>
+<td><a href="https://elysiajs.com/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://www.better-auth.com/">Better Auth</a></td>
+<td>Authentication system</td>
+<td><a href="https://www.better-auth.com/docs">Docs</a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>Database</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://orm.drizzle.team/">Drizzle ORM</a></td>
+<td>TypeScript ORM for PostgreSQL</td>
+<td><a href="https://orm.drizzle.team/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://www.postgresql.org/">PostgreSQL</a></td>
+<td>Relational database</td>
+<td><a href="https://www.postgresql.org/docs/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://redis.io/">Redis</a></td>
+<td>Cache and in-memory storage</td>
+<td><a href="https://redis.io/docs/">Docs</a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>DevOps & Deploy</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://vercel.com/">Vercel</a></td>
+<td>Frontend deployment</td>
+<td><a href="https://vercel.com/docs">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://fly.io/">Fly.io</a></td>
+<td>Backend deployment</td>
+<td><a href="https://fly.io/docs">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.github.com/en/actions">GitHub Actions</a></td>
+<td>CI/CD</td>
+<td><a href="https://docs.github.com/en/actions">Docs</a></td>
+</tr>
+<tr>
+<td colspan="2"><strong>Code Quality</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://biomejs.dev/">Biome</a></td>
+<td>Linter and formatter</td>
+<td><a href="https://biomejs.dev/">Docs</a></td>
+</tr>
+<tr>
+<td><a href="https://www.typescriptlang.org/">TypeScript</a></td>
+<td>JavaScript superset with types</td>
+<td><a href="https://www.typescriptlang.org/docs/">Docs</a></td>
+</tr>
+</tbody>
+</table>
 
 ## 📦 Project Structure
 
@@ -88,27 +162,19 @@ This project is a template. To create a new repository from this template:
 
 ### Local Configuration
 
-For local development, create `.env` files in the respective apps/packages. Check the documentation for each app/package:
+For local development, you can automatically create `.env` files from `.env.example` files by running:
+
+```bash
+bun run build:envs
+```
+
+This command will copy all `.env.example` files to `.env` in the respective apps/packages. After that, you can configure the values in each `.env` file. Check the documentation for each app/package:
 
 - 📖 [API - Environment Variables](./apps/api/README.md#environment-variables)
 - 📖 [Web - Environment Variables](./apps/web/README.md#environment-variables)
 - 📖 [Auth Package](./packages/auth/README.md)
 - 📖 [Database Package](./packages/database/README.md)
 - 📖 [Cache Package](./packages/cache/README.md)
-
-### Required Variables Summary
-
-#### For API (Fly.io)
-
-- `DATABASE_URL` - PostgreSQL URL
-- `SECONDARY_DATABASE_URL` - Redis URL
-- `ORIGIN_ALLOWED` - Allowed origins (CORS)
-- `DISCORD_CLIENT_ID` - Discord application ID
-- `DISCORD_CLIENT_SECRET` - Discord application secret
-
-#### For Web (Vercel)
-
-- `VITE_API_URL` - Backend API URL
 
 ## 🚢 Deploy and CI/CD
 
@@ -178,16 +244,6 @@ Fly.io access token for backend deployment.
 #### Fly.io (Backend)
 
 After creating the app on Fly.io, add environment variables:
-
-**Via CLI:**
-
-```bash
-fly secrets set DATABASE_URL="postgresql://..." -a monorepo-template-api
-fly secrets set SECONDARY_DATABASE_URL="redis://..." -a monorepo-template-api
-fly secrets set ORIGIN_ALLOWED="https://your-app.vercel.app" -a monorepo-template-api
-fly secrets set DISCORD_CLIENT_ID="your_client_id" -a monorepo-template-api
-fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a monorepo-template-api
-```
 
 **Via Dashboard:**
 
