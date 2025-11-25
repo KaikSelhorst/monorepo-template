@@ -17,3 +17,4 @@ services:
 volumes:
   postgres_data:
     driver: local
+    name: monorepo_template_postgres_data

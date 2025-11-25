@@ -1,16 +1,12 @@
-import { sql } from 'drizzle-orm'
-import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { boolean, pgTable, text } from 'drizzle-orm/pg-core'
+import { createdAt, id, updatedAt } from '@/utils/schemas-types'
 
 export const users = pgTable('users', {
-  id: uuid('id').default(sql`uuidv7()`).primaryKey(),
+  id,
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified').default(false).notNull(),
   image: text('image'),
-  createdAt: timestamp('created_at')
-    .$defaultFn(() => new Date())
-    .notNull(),
-  updatedAt: timestamp('updated_at')
-    .$defaultFn(() => new Date())
-    .notNull(),
+  createdAt,
+  updatedAt,
 })
