@@ -1,54 +1,61 @@
+![Monorepo Template](.github/template.png)
+
+<div align="center">
+
 # Zomboid Build
 
 Monorepo template for full-stack development with TypeScript, React, Bun, and Elysia.
 
+</div>
+
 ## 🚀 Main Technologies
 
 ### Runtime & Build Tools
-- **[Bun](https://bun.sh/)** - High-performance JavaScript/TypeScript runtime
-  - 📖 [Documentation](https://bun.sh/docs)
-- **[Turbo](https://turbo.build/)** - Build system for monorepos
-  - 📖 [Documentation](https://turbo.build/repo/docs)
+
+| Title | | |
+|------|-|-|
+| [Bun](https://bun.sh/) | High-performance JavaScript/TypeScript runtime | [Docs](https://bun.sh/docs) |
+| [Turbo](https://turbo.build/) | Build system for monorepos | [Docs](https://turbo.build/repo/docs) |
 
 ### Frontend
-- **[React](https://react.dev/)** - Library for user interfaces
-  - 📖 [Documentation](https://react.dev/)
-- **[TanStack Router](https://tanstack.com/router)** - Type-safe routing
-  - 📖 [Documentation](https://tanstack.com/router/latest)
-- **[TanStack Query](https://tanstack.com/query)** - Server state management
-  - 📖 [Documentation](https://tanstack.com/query/latest)
-- **[Vite](https://vitejs.dev/)** - Build tool and dev server
-  - 📖 [Documentation](https://vitejs.dev/)
-- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
-  - 📖 [Documentation](https://tailwindcss.com/docs)
+
+| Title | | |
+|------|-|-|
+| [React](https://react.dev/) | Library for user interfaces | [Docs](https://react.dev/) |
+| [TanStack Router](https://tanstack.com/router) | Type-safe routing | [Docs](https://tanstack.com/router/latest) |
+| [TanStack Query](https://tanstack.com/query) | Server state management | [Docs](https://tanstack.com/query/latest) |
+| [Vite](https://vitejs.dev/) | Build tool and dev server | [Docs](https://vitejs.dev/) |
+| [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework | [Docs](https://tailwindcss.com/docs) |
 
 ### Backend
-- **[Elysia](https://elysiajs.com/)** - Fast TypeScript web framework
-  - 📖 [Documentation](https://elysiajs.com/)
-- **[Better Auth](https://www.better-auth.com/)** - Authentication system
-  - 📖 [Documentation](https://www.better-auth.com/docs)
+
+| Title | | |
+|------|-|-|
+| [Elysia](https://elysiajs.com/) | Fast TypeScript web framework | [Docs](https://elysiajs.com/) |
+| [Better Auth](https://www.better-auth.com/) | Authentication system | [Docs](https://www.better-auth.com/docs) |
 
 ### Database
-- **[Drizzle ORM](https://orm.drizzle.team/)** - TypeScript ORM for PostgreSQL
-  - 📖 [Documentation](https://orm.drizzle.team/)
-- **[PostgreSQL](https://www.postgresql.org/)** - Relational database
-  - 📖 [Documentation](https://www.postgresql.org/docs/)
-- **[Redis](https://redis.io/)** - Cache and in-memory storage
-  - 📖 [Documentation](https://redis.io/docs/)
+
+| Title | | |
+|------|-|-|
+| [Drizzle ORM](https://orm.drizzle.team/) | TypeScript ORM for PostgreSQL | [Docs](https://orm.drizzle.team/) |
+| [PostgreSQL](https://www.postgresql.org/) | Relational database | [Docs](https://www.postgresql.org/docs/) |
+| [Redis](https://redis.io/) | Cache and in-memory storage | [Docs](https://redis.io/docs/) |
 
 ### DevOps & Deploy
-- **[Vercel](https://vercel.com/)** - Frontend deployment
-  - 📖 [Documentation](https://vercel.com/docs)
-- **[Fly.io](https://fly.io/)** - Backend deployment
-  - 📖 [Documentation](https://fly.io/docs)
-- **[GitHub Actions](https://docs.github.com/en/actions)** - CI/CD
-  - 📖 [Documentation](https://docs.github.com/en/actions)
+
+| Title | | |
+|------|-|-|
+| [Vercel](https://vercel.com/) | Frontend deployment | [Docs](https://vercel.com/docs) |
+| [Fly.io](https://fly.io/) | Backend deployment | [Docs](https://fly.io/docs) |
+| [GitHub Actions](https://docs.github.com/en/actions) | CI/CD | [Docs](https://docs.github.com/en/actions) |
 
 ### Code Quality
-- **[Biome](https://biomejs.dev/)** - Linter and formatter
-  - 📖 [Documentation](https://biomejs.dev/)
-- **[TypeScript](https://www.typescriptlang.org/)** - JavaScript superset with types
-  - 📖 [Documentation](https://www.typescriptlang.org/docs/)
+
+| Title | | |
+|------|-|-|
+| [Biome](https://biomejs.dev/) | Linter and formatter | [Docs](https://biomejs.dev/) |
+| [TypeScript](https://www.typescriptlang.org/) | JavaScript superset with types | [Docs](https://www.typescriptlang.org/docs/) |
 
 ## 📦 Project Structure
 
@@ -92,6 +99,7 @@ For local development, create `.env` files in the respective apps/packages. Chec
 ### Required Variables Summary
 
 #### For API (Fly.io)
+
 - `DATABASE_URL` - PostgreSQL URL
 - `SECONDARY_DATABASE_URL` - Redis URL
 - `ORIGIN_ALLOWED` - Allowed origins (CORS)
@@ -99,6 +107,7 @@ For local development, create `.env` files in the respective apps/packages. Chec
 - `DISCORD_CLIENT_SECRET` - Discord application secret
 
 #### For Web (Vercel)
+
 - `VITE_API_URL` - Backend API URL
 
 ## 🚢 Deploy and CI/CD
@@ -133,6 +142,7 @@ For CI/CD to work, you need to add the following secrets on GitHub:
 Vercel access token for frontend deployment.
 
 **How to get:**
+
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Go to **Settings** → **Tokens**
 3. Click **Create Token**
@@ -141,6 +151,7 @@ Vercel access token for frontend deployment.
 6. **Documentation:** [Vercel - Authentication](https://vercel.com/docs/security/api-tokens)
 
 **Add to GitHub:**
+
 - Name: `VERCEL_TOKEN`
 - Value: Paste the copied token
 - Click **Add secret**
@@ -150,12 +161,14 @@ Vercel access token for frontend deployment.
 Fly.io access token for backend deployment.
 
 **How to get:**
+
 1. Go to [Fly.io Dashboard](https://fly.io/dashboard)
 2. Run in terminal: `fly auth token`
 3. Copy the displayed token
 4. **Documentation:** [Fly.io - Access Tokens](https://fly.io/docs/reference/tokens/)
 
 **Add to GitHub:**
+
 - Name: `FLY_API_TOKEN`
 - Value: Paste the copied token
 - Click **Add secret**
@@ -167,6 +180,7 @@ Fly.io access token for backend deployment.
 After creating the app on Fly.io, add environment variables:
 
 **Via CLI:**
+
 ```bash
 fly secrets set DATABASE_URL="postgresql://..." -a zomboid-api
 fly secrets set SECONDARY_DATABASE_URL="redis://..." -a zomboid-api
@@ -176,6 +190,7 @@ fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
 ```
 
 **Via Dashboard:**
+
 1. Go to [Fly.io Dashboard](https://fly.io/dashboard)
 2. Select your app (`zomboid-api`)
 3. Go to **Secrets**
@@ -183,6 +198,7 @@ fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
 5. **Documentation:** [Fly.io - Secrets](https://fly.io/docs/reference/secrets/)
 
 **Reference Links:**
+
 - 📖 [Fly.io - Environment Variables](https://fly.io/docs/reference/secrets/)
 - 📖 [Fly.io - PostgreSQL](https://fly.io/docs/postgres/)
 - 📖 [Fly.io - Redis](https://fly.io/docs/redis/)
@@ -190,6 +206,7 @@ fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
 #### Vercel (Frontend)
 
 **Via Dashboard:**
+
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Select your project (`zomboid-web`)
 3. Go to **Settings** → **Environment Variables**
@@ -201,6 +218,7 @@ fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
 6. **Documentation:** [Vercel - Environment Variables](https://vercel.com/docs/projects/environment-variables)
 
 **Reference Links:**
+
 - 📖 [Vercel - Environment Variables](https://vercel.com/docs/projects/environment-variables)
 - 📖 [Vercel - Deployments](https://vercel.com/docs/deployments/overview)
 
