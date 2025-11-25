@@ -26,12 +26,12 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://bun.sh/">Bun</a></td>
 <td>High-performance JavaScript/TypeScript runtime</td>
-<td><a href="https://bun.sh/docs">Docs</a></td>
+<td><a href="https://bun.sh/docs">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://turbo.build/">Turbo</a></td>
 <td>Build system for monorepos</td>
-<td><a href="https://turbo.build/repo/docs">Docs</a></td>
+<td><a href="https://turbo.build/repo/docs">Link</a></td>
 </tr>
 <tr>
 <td colspan="2"><strong>Frontend</strong></td>
@@ -40,27 +40,27 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://react.dev/">React</a></td>
 <td>Library for user interfaces</td>
-<td><a href="https://react.dev/">Docs</a></td>
+<td><a href="https://react.dev/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://tanstack.com/router">TanStack Router</a></td>
 <td>Type-safe routing</td>
-<td><a href="https://tanstack.com/router/latest">Docs</a></td>
+<td><a href="https://tanstack.com/router/latest">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://tanstack.com/query">TanStack Query</a></td>
 <td>Server state management</td>
-<td><a href="https://tanstack.com/query/latest">Docs</a></td>
+<td><a href="https://tanstack.com/query/latest">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://vitejs.dev/">Vite</a></td>
 <td>Build tool and dev server</td>
-<td><a href="https://vitejs.dev/">Docs</a></td>
+<td><a href="https://vitejs.dev/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://tailwindcss.com/">Tailwind CSS</a></td>
 <td>Utility-first CSS framework</td>
-<td><a href="https://tailwindcss.com/docs">Docs</a></td>
+<td><a href="https://tailwindcss.com/docs">Link</a></td>
 </tr>
 <tr>
 <td colspan="2"><strong>Backend</strong></td>
@@ -69,12 +69,12 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://elysiajs.com/">Elysia</a></td>
 <td>Fast TypeScript web framework</td>
-<td><a href="https://elysiajs.com/">Docs</a></td>
+<td><a href="https://elysiajs.com/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://www.better-auth.com/">Better Auth</a></td>
 <td>Authentication system</td>
-<td><a href="https://www.better-auth.com/docs">Docs</a></td>
+<td><a href="https://www.better-auth.com/docs">Link</a></td>
 </tr>
 <tr>
 <td colspan="2"><strong>Database</strong></td>
@@ -83,17 +83,17 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://orm.drizzle.team/">Drizzle ORM</a></td>
 <td>TypeScript ORM for PostgreSQL</td>
-<td><a href="https://orm.drizzle.team/">Docs</a></td>
+<td><a href="https://orm.drizzle.team/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://www.postgresql.org/">PostgreSQL</a></td>
 <td>Relational database</td>
-<td><a href="https://www.postgresql.org/docs/">Docs</a></td>
+<td><a href="https://www.postgresql.org/docs/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://redis.io/">Redis</a></td>
 <td>Cache and in-memory storage</td>
-<td><a href="https://redis.io/docs/">Docs</a></td>
+<td><a href="https://redis.io/docs/">Link</a></td>
 </tr>
 <tr>
 <td colspan="2"><strong>DevOps & Deploy</strong></td>
@@ -102,17 +102,17 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://vercel.com/">Vercel</a></td>
 <td>Frontend deployment</td>
-<td><a href="https://vercel.com/docs">Docs</a></td>
+<td><a href="https://vercel.com/docs">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://fly.io/">Fly.io</a></td>
 <td>Backend deployment</td>
-<td><a href="https://fly.io/docs">Docs</a></td>
+<td><a href="https://fly.io/docs">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://docs.github.com/en/actions">GitHub Actions</a></td>
 <td>CI/CD</td>
-<td><a href="https://docs.github.com/en/actions">Docs</a></td>
+<td><a href="https://docs.github.com/en/actions">Link</a></td>
 </tr>
 <tr>
 <td colspan="2"><strong>Code Quality</strong></td>
@@ -121,12 +121,12 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <tr>
 <td><a href="https://biomejs.dev/">Biome</a></td>
 <td>Linter and formatter</td>
-<td><a href="https://biomejs.dev/">Docs</a></td>
+<td><a href="https://biomejs.dev/">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://www.typescriptlang.org/">TypeScript</a></td>
 <td>JavaScript superset with types</td>
-<td><a href="https://www.typescriptlang.org/docs/">Docs</a></td>
+<td><a href="https://www.typescriptlang.org/docs/">Link</a></td>
 </tr>
 </tbody>
 </table>
