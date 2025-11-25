@@ -1,5 +1,5 @@
 {
-  "name": "zomboid-build",
+  "name": "monorepo-template",
   "devDependencies": {
     "@biomejs/biome": "2.3.4",
     "@org/linter": "workspace:*",
