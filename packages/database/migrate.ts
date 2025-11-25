@@ -1,11 +1,17 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { migrate } from 'drizzle-orm/bun-sql/migrator'
 import { database } from '.'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export async function migrateDatabase() {
   console.log('Starting database migration...')
 
+  const migrationsFolder = path.resolve(__dirname, 'migrations')
+
   try {
-    await migrate(database, { migrationsFolder: './migrations' })
+    await migrate(database, { migrationsFolder })
     console.log('Migration completed successfully.')
   } catch (error: unknown) {
     console.error('Migration failed!')
