@@ -1,10 +1,8 @@
 import '@/env'
 import { cacheClient } from '@org/cache'
-import { database, migrateDatabase } from '@org/database'
+import { database } from '@org/database'
 
 import { server } from './infra/http/server'
-
-await migrateDatabase()
 
 const app = server
   .get('/', async () => {
