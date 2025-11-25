@@ -1,7 +1,7 @@
 import { migrate } from 'drizzle-orm/bun-sql/migrator'
 import { database } from '.'
 
-async function main() {
+export async function migrateDatabase() {
   console.log('Starting database migration...')
 
   try {
@@ -11,12 +11,16 @@ async function main() {
     console.error('Migration failed!')
     if (error instanceof Error) {
       console.error(`Error details: ${error.message}`)
-    } else {
-      console.error(`Error details: ${String(error)}`)
     }
+    console.error(`Error details: ${String(error)}`)
     process.exit(1)
   }
-  process.exit(0)
 }
 
-main()
+// This verifies if this file is being run directly
+// ex: bun run migrate.ts (this file will be executed)
+// if another file imports this file, it will not be executed
+if (import.meta.path === Bun.main) {
+  await migrateDatabase()
+  process.exit(0)
+}
