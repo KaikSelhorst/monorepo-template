@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# Zomboid Build
+# Monorepo Template
 
 Monorepo template for full-stack development with TypeScript, React, Bun, and Elysia.
 
@@ -60,7 +60,7 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 ## 📦 Project Structure
 
 ```
-zomboid-build/
+monorepo-template/
 ├── apps/
 │   ├── api/          # Backend API (Elysia + Bun)
 │   └── web/          # Frontend (React + Vite)
@@ -182,17 +182,17 @@ After creating the app on Fly.io, add environment variables:
 **Via CLI:**
 
 ```bash
-fly secrets set DATABASE_URL="postgresql://..." -a zomboid-api
-fly secrets set SECONDARY_DATABASE_URL="redis://..." -a zomboid-api
-fly secrets set ORIGIN_ALLOWED="https://your-app.vercel.app" -a zomboid-api
-fly secrets set DISCORD_CLIENT_ID="your_client_id" -a zomboid-api
-fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
+fly secrets set DATABASE_URL="postgresql://..." -a monorepo-template-api
+fly secrets set SECONDARY_DATABASE_URL="redis://..." -a monorepo-template-api
+fly secrets set ORIGIN_ALLOWED="https://your-app.vercel.app" -a monorepo-template-api
+fly secrets set DISCORD_CLIENT_ID="your_client_id" -a monorepo-template-api
+fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a monorepo-template-api
 ```
 
 **Via Dashboard:**
 
 1. Go to [Fly.io Dashboard](https://fly.io/dashboard)
-2. Select your app (`zomboid-api`)
+2. Select your app (`monorepo-template-api`)
 3. Go to **Secrets**
 4. Add each environment variable
 5. **Documentation:** [Fly.io - Secrets](https://fly.io/docs/reference/secrets/)
@@ -208,11 +208,11 @@ fly secrets set DISCORD_CLIENT_SECRET="your_client_secret" -a zomboid-api
 **Via Dashboard:**
 
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Select your project (`zomboid-web`)
+2. Select your project (`monorepo-template-web`)
 3. Go to **Settings** → **Environment Variables**
 4. Add the variable:
    - **Key:** `VITE_API_URL`
-   - **Value:** Your API URL (e.g., `https://zomboid-api.fly.dev`)
+   - **Value:** Your API URL (e.g., `https://monorepo-template-api.fly.dev`)
    - **Environment:** Production, Preview, Development (select as needed)
 5. Click **Save**
 6. **Documentation:** [Vercel - Environment Variables](https://vercel.com/docs/projects/environment-variables)

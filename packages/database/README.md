@@ -26,7 +26,7 @@ postgresql://user:password@host:port/database_name
 
 **Example:**
 ```env
-DATABASE_URL=postgresql://postgres:password@localhost:5432/zomboid_db
+DATABASE_URL=postgresql://postgres:password@localhost:5432/monorepo_template_db
 ```
 
 ## Available Scripts

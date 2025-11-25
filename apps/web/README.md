@@ -33,7 +33,7 @@ https://api.example.com
 VITE_API_URL=http://localhost:3001
 
 # Production
-VITE_API_URL=https://zomboid-api.fly.dev
+VITE_API_URL=https://monorepo-template-api.fly.dev
 ```
 
 **⚠️ Important:** Environment variables in Vite must start with `VITE_` to be exposed to the client.
