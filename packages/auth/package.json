@@ -1,6 +1,9 @@
 {
   "name": "@org/auth",
   "private": true,
+  "scripts": {
+    "type:check": "tsc --noEmit"
+  },
   "dependencies": {
     "@org/cache": "workspace:*",
     "@org/database": "workspace:*",

@@ -1,4 +1,4 @@
-import { auth } from '@/auth'
+import { auth } from '../auth'
 
 let _schema: ReturnType<typeof auth.api.generateOpenAPISchema>
 

@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import {  timestamp, uuid } from 'drizzle-orm/pg-core'
+import { timestamp, uuid } from 'drizzle-orm/pg-core'
 
 export const id = uuid().default(sql`uuidv7()`).primaryKey()
 

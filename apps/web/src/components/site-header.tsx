@@ -18,7 +18,7 @@ export function SiteHeader() {
 function ThemeButton() {
   const { toggleTheme } = useTheme()
   return (
-    <Button onClick={toggleTheme} variant="foreground">
+    <Button onClick={toggleTheme} variant="ghost">
       <Theme className="size-4.5" />
     </Button>
   )

@@ -311,6 +311,10 @@ To trigger deployment:
 - [Bun](https://bun.sh/) installed (version 1.3.3 or higher)
 - Docker and Docker Compose (for local database)
 
+### ⚠️ TypeScript Configuration Warning
+
+**Important:** It's recommended to use the minimum of TypeScript aliases (`paths` in `tsconfig.json`) in packages, as it can cause conflicts with apps during type checking. Prefer using relative imports or direct package imports when possible.
+
 ### Main Commands
 
 ```bash
