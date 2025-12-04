@@ -14,6 +14,7 @@
       "outputs": []
     },
     "lint": { "outputs": [] },
+    "type:check": { "outputs": [] },
     "docker:down": { "outputs": [], "cache": false }
   }
 }

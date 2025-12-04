@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "@org/auth": "workspace:*",
