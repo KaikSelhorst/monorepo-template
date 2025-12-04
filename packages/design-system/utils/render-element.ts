@@ -1,7 +1,7 @@
 import type { useRender } from '@base-ui-components/react'
 import React from 'react'
 
-type Render = useRender.RenderProp
+type Render = useRender.RenderProp | undefined
 
 export function renderElement(
   asChild: boolean,
