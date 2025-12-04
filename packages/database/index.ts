@@ -1,6 +1,6 @@
 import { SQL } from 'bun'
 import { drizzle } from 'drizzle-orm/bun-sql'
-import { env } from '@/env'
+import { env } from './env'
 import * as schemas from './schemas'
 
 export { migrateDatabase } from './migrate'

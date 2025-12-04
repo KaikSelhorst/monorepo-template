@@ -1,5 +1,5 @@
 import { boolean, pgTable, text } from 'drizzle-orm/pg-core'
-import { createdAt, id, updatedAt } from '@/utils/schemas-types'
+import { createdAt, id, updatedAt } from '../utils/schemas-types'
 
 export const users = pgTable('users', {
   id,

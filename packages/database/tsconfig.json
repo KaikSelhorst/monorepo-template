@@ -4,7 +4,6 @@
     "target": "ES2021",
     "module": "ES2022",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": { "@/*": ["./*"] }
+    "forceConsistentCasingInFileNames": true
   }
 }
