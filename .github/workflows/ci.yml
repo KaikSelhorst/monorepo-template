@@ -1,8 +1,14 @@
 name: CI/CD
 
 on:
-  release:
-    types: [published] # Runs only when a release is published
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "apps/api/**"
+      - "turbo.json"
+      - "package.json"
+      - "packages/**"
 
 jobs:
   build-and-deploy:
