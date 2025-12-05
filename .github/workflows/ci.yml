@@ -60,8 +60,8 @@ jobs:
           export PATH="$HOME/.fly/bin:$PATH"
 
           # Create app if it doesn't exist
-          if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "zomboid-api"; then
-            fly apps create zomboid-api --org personal -t "$FLY_API_TOKEN"
+          if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "monorepo-template-api"; then
+            fly apps create monorepo-template-api --org personal -t "$FLY_API_TOKEN"
           fi
 
           # Deploy
@@ -70,7 +70,7 @@ jobs:
           # Health check with retries
           for i in {1..6}; do
             sleep 10
-            if curl -f https://zomboid-api.fly.dev/health; then
+            if curl -f https://monorepo-template-api.fly.dev/health; then
               echo "API is healthy!"
               exit 0
             fi
@@ -91,7 +91,7 @@ jobs:
           export PATH="$HOME/.fly/bin:$PATH"
 
           # Get previous successful release image
-          PREV_VERSION=$(fly releases --app zomboid-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
+          PREV_VERSION=$(fly releases --app monorepo-template-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
 
           if [ -z "$PREV_VERSION" ]; then
             echo "No previous version found!"
@@ -105,4 +105,4 @@ jobs:
             -t "$FLY_API_TOKEN"
 
           sleep 10
-          curl -f https://zomboid-api.fly.dev/health || exit 1
+          curl -f https://monorepo-template-api.fly.dev/health || exit 1
