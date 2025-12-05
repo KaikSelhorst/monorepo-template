@@ -13,12 +13,13 @@
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@org/design-system/components",
-    "utils": "@org/design-system/lib/class-merge",
+    "utils": "@org/design-system/lib/utils",
     "ui": "@org/design-system/components/ui",
-    "lib": "@org/design-system/class-merge",
+    "lib": "@org/design-system/lib",
     "hooks": "@org/design-system/hooks"
   },
   "registries": {
-    "@reui": "https://reui.io/r/{name}.json"
+    "@reui": "https://reui.io/r/{name}.json",
+    "@basecn": "https://basecn.dev/r/{name}.json"
   }
 }

@@ -1,7 +1,6 @@
 import { useRender } from '@base-ui-components/react/use-render'
-import { cn } from '@org/design-system/utils/class-merge'
-import { mergeElementProps } from '@org/design-system/utils/merge-element-props'
-import { renderElement } from '@org/design-system/utils/render-element'
+import { mergeElementProps, renderElement } from '@org/design-system/lib/baseui'
+import { cn } from '@org/design-system/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
 
@@ -205,15 +204,13 @@ function Badge({
     'data-slot': 'badge',
   }
 
-  const el = renderElement(asChild, children, render || <span />)
+  const element = renderElement(asChild, children, render || <span />)
   const fnProps = mergeElementProps(asChild, children, defaultProps, props)
 
-  const element = useRender({
-    render: el,
+  return useRender({
+    render: element,
     props: fnProps,
   })
-
-  return element
 }
 
 function BadgeButton({
