@@ -1,7 +1,6 @@
 import { useRender } from '@base-ui-components/react/use-render'
-import { cn } from '@org/design-system/utils/class-merge'
-import { mergeElementProps } from '@org/design-system/utils/merge-element-props'
-import { renderElement } from '@org/design-system/utils/render-element'
+import { mergeElementProps, renderElement } from '@org/design-system/lib/baseui'
+import { cn } from '@org/design-system/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
 
