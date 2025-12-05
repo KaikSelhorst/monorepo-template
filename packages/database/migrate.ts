@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export async function migrateDatabase() {
   console.log('Starting database migration...')
-
   const migrationsFolder = path.resolve(__dirname, 'migrations')
 
   try {
