@@ -205,15 +205,13 @@ function Badge({
     'data-slot': 'badge',
   }
 
-  const el = renderElement(asChild, children, render || <span />)
+  const element = renderElement(asChild, children, render || <span />)
   const fnProps = mergeElementProps(asChild, children, defaultProps, props)
 
-  const element = useRender({
-    render: el,
+  return useRender({
+    render: element,
     props: fnProps,
   })
-
-  return element
 }
 
 function BadgeButton({
