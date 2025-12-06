@@ -15,23 +15,23 @@
     "@org/validation": "workspace:*",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/devtools-vite": "0.3.11",
-    "@tanstack/react-devtools": "0.8.1",
-    "@tanstack/react-query": "5.90.10",
-    "@tanstack/react-router": "1.134.15",
-    "@tanstack/react-router-devtools": "1.134.15",
-    "@tanstack/router-plugin": "1.134.15",
+    "@tanstack/react-devtools": "0.8.2",
+    "@tanstack/react-query": "5.90.12",
+    "@tanstack/react-router": "1.139.14",
+    "@tanstack/react-router-devtools": "1.139.15",
+    "@tanstack/router-plugin": "1.139.14",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
-    "@types/node": "24.10.0",
+    "@types/node": "24.10.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "5.1.0",
-    "jsdom": "27.1.0",
+    "@vitejs/plugin-react": "5.1.1",
+    "jsdom": "27.2.0",
     "typescript": "5.9.3",
-    "vite": "7.2.2"
+    "vite": "7.2.6"
   }
 }
