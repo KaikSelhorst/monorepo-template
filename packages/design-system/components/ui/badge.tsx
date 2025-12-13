@@ -1,4 +1,4 @@
-import { useRender } from '@base-ui-components/react/use-render'
+import { useRender } from '@base-ui/react'
 import { mergeElementProps, renderElement } from '@org/design-system/lib/baseui'
 import { cn } from '@org/design-system/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
