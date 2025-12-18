@@ -2,7 +2,7 @@
   "name": "web",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.3.2",
+  "packageManager": "bun@1.3.5",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build",
@@ -13,25 +13,25 @@
     "@org/auth": "workspace:*",
     "@org/design-system": "workspace:*",
     "@org/validation": "workspace:*",
-    "@tailwindcss/vite": "^4.0.6",
-    "@tanstack/devtools-vite": "0.3.11",
-    "@tanstack/react-devtools": "0.8.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/devtools-vite": "0.3.12",
+    "@tanstack/react-devtools": "0.8.4",
     "@tanstack/react-query": "5.90.12",
-    "@tanstack/react-router": "1.139.14",
-    "@tanstack/react-router-devtools": "1.139.15",
-    "@tanstack/router-plugin": "1.139.14",
+    "@tanstack/react-router": "1.141.6",
+    "@tanstack/react-router-devtools": "1.141.6",
+    "@tanstack/router-plugin": "1.141.7",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
-    "@types/node": "24.10.1",
+    "@types/node": "25.0.3",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "5.1.1",
-    "jsdom": "27.2.0",
+    "@vitejs/plugin-react": "5.1.2",
+    "jsdom": "27.3.0",
     "typescript": "5.9.3",
-    "vite": "7.2.6"
+    "vite": "7.3.0"
   }
 }

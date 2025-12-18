@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@elysiajs/cors": "1.4.0",
-    "@elysiajs/openapi": "1.4.11",
+    "@elysiajs/openapi": "1.4.12",
     "@org/auth": "workspace:*",
     "@org/cache": "workspace:*",
     "@org/database": "workspace:*",
     "@org/validation": "workspace:*",
-    "elysia": "latest"
+    "elysia": "1.4.19"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
     "@types/bun": "catalog:",
-    "bun-types": "latest"
+    "bun-types": "1.3.5"
   }
 }
