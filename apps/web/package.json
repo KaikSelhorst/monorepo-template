@@ -14,12 +14,12 @@
     "@org/design-system": "workspace:*",
     "@org/validation": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/devtools-vite": "0.3.12",
-    "@tanstack/react-devtools": "0.8.4",
-    "@tanstack/react-query": "5.90.12",
-    "@tanstack/react-router": "1.141.6",
-    "@tanstack/react-router-devtools": "1.141.6",
-    "@tanstack/router-plugin": "1.141.7",
+    "@tanstack/devtools-vite": "0.4.0",
+    "@tanstack/react-devtools": "0.9.0",
+    "@tanstack/react-query": "5.90.16",
+    "@tanstack/react-router": "1.144.0",
+    "@tanstack/react-router-devtools": "1.144.0",
+    "@tanstack/router-plugin": "1.145.2",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:"
@@ -30,7 +30,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "5.1.2",
-    "jsdom": "27.3.0",
+    "jsdom": "27.4.0",
     "typescript": "5.9.3",
     "vite": "7.3.0"
   }
