@@ -1,5 +1,5 @@
-import type { useRender } from '@base-ui-components/react'
-import { mergeProps } from '@base-ui-components/react'
+import type { useRender } from '@base-ui/react'
+import { mergeProps } from '@base-ui/react'
 import { isValidElement } from 'react'
 
 export function mergeElementProps<T extends object, P extends object>(
