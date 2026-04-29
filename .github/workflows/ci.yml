@@ -8,6 +8,7 @@ on:
       - "apps/api/**"
       - "turbo.json"
       - "package.json"
+      - "bun.lock"
       - "packages/**"
 
 jobs:
@@ -28,14 +29,28 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Type check
+        run: bun run type:check
+
+      - name: Lint
+        run: bun run check
+
       - uses: dorny/paths-filter@v3
         id: changes
         with:
           filters: |
             web:
               - 'apps/web/**'
+              - 'packages/**'
             api:
               - 'apps/api/**'
+              - 'packages/**'
+
+      - name: Setup Fly CLI
+        if: steps.changes.outputs.api == 'true'
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
       # =============== DEPLOY WEB (Vercel) ===============
       - name: Deploy Web to Vercel
@@ -56,18 +71,14 @@ jobs:
         run: |
           cd apps/api
           bun run build:alpine
-          curl -L https://fly.io/install.sh | sh
-          export PATH="$HOME/.fly/bin:$PATH"
 
           # Create app if it doesn't exist
           if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "monorepo-template-api"; then
             fly apps create monorepo-template-api --org personal -t "$FLY_API_TOKEN"
           fi
 
-          # Deploy
           fly deploy -t "$FLY_API_TOKEN"
 
-          # Health check with retries
           for i in {1..6}; do
             sleep 10
             if curl -f https://monorepo-template-api.fly.dev/health; then
@@ -87,10 +98,6 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
           cd apps/api
-          curl -L https://fly.io/install.sh | sh
-          export PATH="$HOME/.fly/bin:$PATH"
-
-          # Get previous successful release image
           PREV_VERSION=$(fly releases --app monorepo-template-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
 
           if [ -z "$PREV_VERSION" ]; then
