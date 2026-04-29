@@ -8,7 +8,7 @@
     "@org/cache": "workspace:*",
     "@org/database": "workspace:*",
     "@org/validation": "workspace:*",
-    "better-auth": "1.4.7"
+    "better-auth": "1.6.9"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*"

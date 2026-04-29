@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@org/validation": "workspace:*",
-    "drizzle-orm": "0.45.1"
+    "drizzle-orm": "0.45.2"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
-    "drizzle-kit": "0.31.8",
-    "pg": "8.16.3"
+    "drizzle-kit": "0.31.10",
+    "pg": "8.20.0"
   }
 }
