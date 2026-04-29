@@ -8,8 +8,8 @@
     "db:generate": "drizzle-kit generate --config=./drizzle.config.ts",
     "db:migrate": "bun run ./migrate.ts",
     "type:check": "tsc --noEmit",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
     "docker:kill": "docker compose down --volumes --remove-orphans"
   },
   "dependencies": {
