@@ -20,15 +20,15 @@
     "@tanstack/react-router": "1.168.26",
     "@tanstack/react-router-devtools": "1.166.13",
     "@tanstack/router-plugin": "1.167.29",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
-    "tailwindcss": "4.2.4"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "catalog:"
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
     "@types/node": "25.6.0",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "6.0.1",
     "jsdom": "29.1.0",
     "typescript": "6.0.3",

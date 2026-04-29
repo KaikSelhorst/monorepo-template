@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@org/tsconfig": "workspace:*",
-    "@types/bun": "1.3.13",
+    "@types/bun": "catalog:",
     "bun-types": "1.3.13"
   }
 }
