@@ -7,7 +7,7 @@
 # command at the monorepo root. Only after that can the Dockerfile be executed correctly within
 # the project context.
 
-FROM oven/bun:1-alpine
+FROM alpine:3
 
 WORKDIR /app
 COPY api .
