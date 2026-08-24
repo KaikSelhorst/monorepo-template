@@ -15,7 +15,10 @@ export const auth = betterAuth({
   secondaryStorage: {
     delete: async (key) => String(await cacheClient.del(key)),
     get: (key) => cacheClient.get(key),
-    set: (key, value) => cacheClient.set(key, value),
+    set: (key, value, ttl) =>
+      ttl !== undefined && ttl > 0
+        ? cacheClient.set(key, value, 'EX', ttl)
+        : cacheClient.set(key, value),
   },
 
   session: { cookieCache: { enabled: true, maxAge: 60 * 5 } },
