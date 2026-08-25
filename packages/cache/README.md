@@ -19,7 +19,7 @@ redis://user:password@host:port
 
 **How to get:**
 - **Local (Docker):** Docker Compose automatically configures it when you run `bun docker:up`
-- **Production:** Configure your Redis URL on the hosting service (e.g., Fly.io, Upstash, Redis Cloud, etc.)
+- **Production:** Configure your Redis URL on the hosting service (e.g., Upstash, Redis Cloud, etc.)
 - **Documentation:** [Redis Connection Strings](https://redis.io/docs/management/connection-strings/)
 
 **Example:**

@@ -21,7 +21,7 @@ postgresql://user:password@host:port/database_name
 
 **How to get:**
 - **Local (Docker):** Docker Compose automatically configures it when you run `bun docker:up`
-- **Production:** Configure your PostgreSQL URL on the hosting service (e.g., Fly.io, Railway, Supabase, etc.)
+- **Production:** Configure your PostgreSQL URL on the hosting service (e.g., Railway, Supabase, etc.)
 - **Documentation:** [Drizzle - Database Connection](https://orm.drizzle.team/docs/get-started-postgresql#postgresjs)
 
 **Example:**

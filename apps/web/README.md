@@ -24,7 +24,7 @@ https://api.example.com
 
 **How to get:**
 - **Local development:** Usually `http://localhost:3001` (or the port where your API is running)
-- **Production:** URL of your deployed backend (e.g., `https://monorepo-template-api.fly.dev`)
+- **Production:** URL of your deployed backend (e.g., `https://api.example.com`)
 - **Documentation:** [Vite - Environment Variables](https://vitejs.dev/guide/env-and-mode.html)
 
 **Example:**
@@ -33,7 +33,7 @@ https://api.example.com
 VITE_API_URL=http://localhost:3001
 
 # Production
-VITE_API_URL=https://monorepo-template-api.fly.dev
+VITE_API_URL=https://api.example.com
 ```
 
 **⚠️ Important:** Environment variables in Vite must start with `VITE_` to be exposed to the client.
@@ -51,7 +51,7 @@ The web application is deployed on **Vercel**. CI/CD automatically:
 2. Builds the application
 3. Deploys to Vercel
 
-For more information about deployment, see the [main README](../../README.md#deploy).
+For more information about deployment, see the [main README](../../README.md#deploy-and-cicd).
 
 ## Structure
 

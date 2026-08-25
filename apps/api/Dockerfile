@@ -9,6 +9,7 @@
 
 FROM alpine:3
 
+RUN apk add --no-cache libstdc++ libgcc
 WORKDIR /app
 COPY api .
 RUN chmod +x api

@@ -11,12 +11,15 @@ on:
       - "bun.lock"
       - "packages/**"
 
+env:
+  REGISTRY: ghcr.io
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -46,12 +49,6 @@ jobs:
               - 'apps/api/**'
               - 'packages/**'
 
-      - name: Setup Fly CLI
-        if: steps.changes.outputs.api == 'true'
-        run: |
-          curl -L https://fly.io/install.sh | sh
-          echo "$HOME/.fly/bin" >> $GITHUB_PATH
-
       # =============== DEPLOY WEB (Vercel) ===============
       - name: Deploy Web to Vercel
         if: steps.changes.outputs.web == 'true'
@@ -63,53 +60,45 @@ jobs:
           bunx vercel build --prod --yes --token=$VERCEL_TOKEN
           bunx vercel deploy --prod --prebuilt --token=$VERCEL_TOKEN
 
-      # =============== DEPLOY API (Fly.io + Docker + --compile) ===============
-      - name: Deploy API to Fly.io
+      # =============== PUBLISH API (GHCR + Docker + --compile) ===============
+      - name: Compile API for Alpine
         if: steps.changes.outputs.api == 'true'
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: |
-          cd apps/api
-          bun run build:alpine
+        run: bun run build:alpine
+        working-directory: apps/api
 
-          # Create app if it doesn't exist
-          if ! fly apps list -t "$FLY_API_TOKEN" | grep -q "monorepo-template-api"; then
-            fly apps create monorepo-template-api --org personal -t "$FLY_API_TOKEN"
-          fi
+      - name: Log in to GitHub Container Registry
+        if: steps.changes.outputs.api == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-          fly deploy -t "$FLY_API_TOKEN"
+      - name: Lowercase image name
+        if: steps.changes.outputs.api == 'true'
+        run: echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}/api" >> "$GITHUB_ENV"
 
-          for i in {1..6}; do
-            sleep 10
-            if curl -f https://monorepo-template-api.fly.dev/health; then
-              echo "API is healthy!"
-              exit 0
-            fi
-            echo "Attempt $i/6..."
-          done
+      - name: Extract Docker metadata
+        if: steps.changes.outputs.api == 'true'
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha
+            type=raw,value=latest
 
-          echo "Deployment failed after 6 attempts!"
-          exit 1
+      - name: Set up Docker Buildx
+        if: steps.changes.outputs.api == 'true'
+        uses: docker/setup-buildx-action@v3
 
-      # =============== AUTOMATIC ROLLBACK ===============
-      - name: Rollback API on Failure
-        if: failure() && steps.changes.outputs.api == 'true'
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: |
-          cd apps/api
-          PREV_VERSION=$(fly releases --app monorepo-template-api --json -t "$FLY_API_TOKEN" | jq -r '.[1].ImageRef // empty')
-
-          if [ -z "$PREV_VERSION" ]; then
-            echo "No previous version found!"
-            exit 1
-          fi
-
-          echo "Rolling back to version: $PREV_VERSION"
-          fly deploy \
-            --image "$PREV_VERSION" \
-            --strategy immediate \
-            -t "$FLY_API_TOKEN"
-
-          sleep 10
-          curl -f https://monorepo-template-api.fly.dev/health || exit 1
+      - name: Build and push API image
+        if: steps.changes.outputs.api == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: apps/api
+          file: apps/api/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

@@ -5,6 +5,7 @@
     "dev": "bun run --watch src/index.ts",
     "build": "bun build src/index.ts --compile --outfile=api",
     "build:alpine": "bun run build --minify --sourcemap --target=bun-linux-x64-musl",
+    "docker:build": "bun run build:alpine && docker build --platform linux/amd64 -t api:local .",
     "preview": "./api",
     "type:check": "tsc --noEmit"
   },

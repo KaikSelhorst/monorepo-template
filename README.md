@@ -105,9 +105,14 @@ Monorepo template for full-stack development with TypeScript, React, Bun, and El
 <td><a href="https://vercel.com/docs">Link</a></td>
 </tr>
 <tr>
-<td><a href="https://fly.io/">Fly.io</a></td>
-<td>Backend deployment</td>
-<td><a href="https://fly.io/docs">Link</a></td>
+<td><a href="https://www.docker.com/">Docker</a></td>
+<td>API image and local Postgres/Redis</td>
+<td><a href="https://docs.docker.com/">Link</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry</a></td>
+<td>API image registry</td>
+<td><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">Link</a></td>
 </tr>
 <tr>
 <td><a href="https://docs.github.com/en/actions">GitHub Actions</a></td>
@@ -178,21 +183,22 @@ This command will copy all `.env.example` files to `.env` in the respective apps
 
 ## 🚢 Deploy and CI/CD
 
-The project uses GitHub Actions for automatic CI/CD. Deployment is triggered when a **release is published** on GitHub.
+The project uses GitHub Actions for automatic CI/CD. The workflow runs on **push to `main`**.
 
 ### How It Works
 
-1. **Trigger:** Publishing a release on GitHub
-2. **Change Detection:** The workflow detects changes in `apps/web` or `apps/api`
-3. **Automatic Deploy:**
+1. **Trigger:** Pushing to `main` (when web, API, packages, or lockfile files change)
+2. **Checks:** Type check and lint
+3. **Change Detection:** The workflow detects changes in `apps/web` or `apps/api`
+4. **Publish:**
    - **Web:** Deploy to Vercel
-   - **API:** Deploy to Fly.io
-4. **Health Check:** Automatic API health verification
-5. **Rollback:** Automatic rollback on failure
+   - **API:** Compile a Linux Alpine binary, build the Docker image, and push it to GitHub Container Registry (`ghcr.io/<owner>/<repo>/api`)
+
+GHCR authentication uses the workflow `GITHUB_TOKEN`. No extra API-registry secret is required. The first published package is often **private** until you change visibility under **Packages**.
 
 ### GitHub Secrets Configuration
 
-For CI/CD to work, you need to add the following secrets on GitHub:
+For the Vercel deploy to work, add the following secret on GitHub:
 
 #### 1. Access Secrets Configuration
 
@@ -222,42 +228,23 @@ Vercel access token for frontend deployment.
 - Value: Paste the copied token
 - Click **Add secret**
 
-##### `FLY_API_TOKEN`
-
-Fly.io access token for backend deployment.
-
-**How to get:**
-
-1. Go to [Fly.io Dashboard](https://fly.io/dashboard)
-2. Run in terminal: `fly auth token`
-3. Copy the displayed token
-4. **Documentation:** [Fly.io - Access Tokens](https://fly.io/docs/reference/tokens/)
-
-**Add to GitHub:**
-
-- Name: `FLY_API_TOKEN`
-- Value: Paste the copied token
-- Click **Add secret**
-
 ### Environment Variables Configuration on Platforms
 
-#### Fly.io (Backend)
+#### API container (GitHub Container Registry)
 
-After creating the app on Fly.io, add environment variables:
+CI publishes the image; it does not start a live API. Pull and run it wherever you host containers, and pass the same environment variables documented in [apps/api/README.md](./apps/api/README.md#environment-variables).
 
-**Via Dashboard:**
+Image tags:
 
-1. Go to [Fly.io Dashboard](https://fly.io/dashboard)
-2. Select your app (`monorepo-template-api`)
-3. Go to **Secrets**
-4. Add each environment variable
-5. **Documentation:** [Fly.io - Secrets](https://fly.io/docs/reference/secrets/)
+- `ghcr.io/<owner>/<repo>/api:latest`
+- `ghcr.io/<owner>/<repo>/api:sha-<short-sha>`
 
-**Reference Links:**
+```bash
+docker pull ghcr.io/<owner>/<repo>/api:latest
+docker run --env-file apps/api/.env -p 3001:3001 ghcr.io/<owner>/<repo>/api:latest
+```
 
-- 📖 [Fly.io - Environment Variables](https://fly.io/docs/reference/secrets/)
-- 📖 [Fly.io - PostgreSQL](https://fly.io/docs/postgres/)
-- 📖 [Fly.io - Redis](https://fly.io/docs/redis/)
+Replace `<owner>/<repo>` with your GitHub repository, for example `octocat/monorepo-template`.
 
 #### Vercel (Frontend)
 
@@ -268,7 +255,7 @@ After creating the app on Fly.io, add environment variables:
 3. Go to **Settings** → **Environment Variables**
 4. Add the variable:
    - **Key:** `VITE_API_URL`
-   - **Value:** Your API URL (e.g., `https://monorepo-template-api.fly.dev`)
+   - **Value:** Your API URL (e.g., `https://api.example.com`)
    - **Environment:** Production, Preview, Development (select as needed)
 5. Click **Save**
 6. **Documentation:** [Vercel - Environment Variables](https://vercel.com/docs/projects/environment-variables)
@@ -277,19 +264,6 @@ After creating the app on Fly.io, add environment variables:
 
 - 📖 [Vercel - Environment Variables](https://vercel.com/docs/projects/environment-variables)
 - 📖 [Vercel - Deployments](https://vercel.com/docs/deployments/overview)
-
-### How to Create a Release
-
-To trigger deployment:
-
-1. Go to the **Releases** tab on GitHub
-2. Click **Create a new release**
-3. Choose the tag (or create a new one)
-4. Fill in the title and description
-5. Click **Publish release**
-6. CI/CD will be triggered automatically
-
-**Documentation:** [GitHub - Creating Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
 
 ## 📚 Apps and Packages Documentation
 
@@ -357,4 +331,5 @@ When running `bun run dev` on Windows, you may see a message about files "outsid
 - [Elysia Documentation](https://elysiajs.com/)
 - [React Documentation](https://react.dev/)
 - [Vercel Documentation](https://vercel.com/docs)
-- [Fly.io Documentation](https://fly.io/docs)
+- [Docker Documentation](https://docs.docker.com/)
+- [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)

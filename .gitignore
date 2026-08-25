@@ -50,3 +50,5 @@ count.txt
 
 # Api
 api.exe
+apps/api/api
+apps/api/index.js.map

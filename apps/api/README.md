@@ -52,18 +52,32 @@ ORIGIN_ALLOWED=http://localhost:3000
 
 - `bun dev` - Starts the server in development mode with hot-reload
 - `bun build` - Compiles the application to an executable
-- `bun build:alpine` - Compiles for Linux Alpine (used in deployment)
+- `bun build:alpine` - Compiles for Linux Alpine (used by the Docker image)
+- `bun run docker:build` - Compiles for Alpine and builds a local `api:local` image
 - `bun preview` - Runs the compiled binary
 
 ## Deploy
 
-The API is deployed on **Fly.io** using Docker. CI/CD automatically:
-1. Compiles the application for Linux Alpine
-2. Deploys using Fly.io CLI
-3. Runs health checks
-4. Performs automatic rollback on failure
+CI publishes a Docker image to **GitHub Container Registry**. On push to `main` it:
+1. Compiles the application for Linux Alpine (`bun-linux-x64-musl`)
+2. Builds the image from this `Dockerfile`
+3. Pushes `ghcr.io/<owner>/<repo>/api:latest` and a SHA tag
 
-For more information about deployment, see the [main README](../../README.md#deploy).
+Pull and run:
+
+```bash
+docker pull ghcr.io/<owner>/<repo>/api:latest
+docker run --env-file .env -p 3001:3001 ghcr.io/<owner>/<repo>/api:latest
+```
+
+Build locally without pushing:
+
+```bash
+bun run docker:build
+docker run --env-file .env -p 3001:3001 api:local
+```
+
+For more information about deployment, see the [main README](../../README.md#deploy-and-cicd).
 
 ## Structure
 
@@ -75,11 +89,12 @@ apps/api/
 │   └── infra/
 │       └── http/             # HTTP server configuration
 ├── Dockerfile                # Docker configuration
-└── fly.toml                  # Fly.io configuration
+└── .dockerignore             # Docker build exclusions
 ```
 
 ## Useful Links
 
 - [Elysia Documentation](https://elysiajs.com/)
 - [Bun Documentation](https://bun.sh/docs)
-- [Fly.io Documentation](https://fly.io/docs/)
+- [Docker Documentation](https://docs.docker.com/)
+- [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
