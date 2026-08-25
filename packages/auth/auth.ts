@@ -13,9 +13,24 @@ export const auth = betterAuth({
 
   advanced: { database: { generateId: false } },
   secondaryStorage: {
-    delete: async (key) => String(await cacheClient.del(key)),
+    delete: async (key) => {
+      await cacheClient.del(key)
+    },
     get: (key) => cacheClient.get(key),
-    set: (key, value) => cacheClient.set(key, value),
+    getAndDelete: (key) => cacheClient.getdel(key),
+    increment: async (key, ttl) => {
+      const value = await cacheClient.send('EVAL', [
+        'local value = redis.call("INCR", KEYS[1]) if value == 1 then redis.call("EXPIRE", KEYS[1], ARGV[1]) end return value',
+        '1',
+        key,
+        String(ttl),
+      ])
+      return Number(value)
+    },
+    set: async (key, value, ttl) => {
+      if (ttl) await cacheClient.set(key, value, 'EX', String(ttl))
+      else await cacheClient.set(key, value)
+    },
   },
 
   session: { cookieCache: { enabled: true, maxAge: 60 * 5 } },

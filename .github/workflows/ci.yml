@@ -19,12 +19,14 @@ jobs:
       deployments: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 2
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -35,7 +37,7 @@ jobs:
       - name: Lint
         run: bun run check
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: changes
         with:
           filters: |
@@ -59,7 +61,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/web
-          bunx vercel link --yes --project zomboid-web --token=$VERCEL_TOKEN
+          bunx vercel link --yes --project monorepo-template-web --token=$VERCEL_TOKEN
           bunx vercel build --prod --yes --token=$VERCEL_TOKEN
           bunx vercel deploy --prod --prebuilt --token=$VERCEL_TOKEN
 

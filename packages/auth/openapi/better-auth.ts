@@ -2,8 +2,10 @@ import { auth } from '../auth'
 
 let _schema: ReturnType<typeof auth.api.generateOpenAPISchema>
 
-// biome-ignore lint/suspicious/noAssignInExpressions: i don`t know why it works
-const getSchema = async () => (_schema ??= auth.api.generateOpenAPISchema())
+const getSchema = async () => {
+  _schema ??= auth.api.generateOpenAPISchema()
+  return _schema
+}
 
 export const betterAuthOpenAPI = {
   getPaths: (prefix = '/auth') =>

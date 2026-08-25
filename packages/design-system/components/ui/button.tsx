@@ -1,5 +1,4 @@
-import { useRender } from '@base-ui/react'
-import { mergeElementProps, renderElement } from '@org/design-system/lib/baseui'
+import { mergeProps, useRender } from '@base-ui/react'
 import { cn } from '@org/design-system/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -49,34 +48,22 @@ const buttonVariants = cva(
 interface ButtonProps extends useRender.ComponentProps<'button'> {
   variant?: VariantProps<typeof buttonVariants>['variant']
   size?: VariantProps<typeof buttonVariants>['size']
-  asChild?: boolean
 }
 
 function Button(props: ButtonProps) {
-  const {
-    className,
-    size,
-    variant,
-    render,
-    asChild = false,
-    children,
-    ...restProps
-  } = props
-
-  const element = renderElement(asChild, children, render)
-
-  const defaultProps = {
-    className: cn(buttonVariants({ className, size, variant })),
-    'data-slot': 'button',
-    type: 'button',
-  }
-
-  const fnProps = mergeElementProps(asChild, children, defaultProps, restProps)
+  const { className, size, variant, render, children, ...restProps } = props
 
   return useRender({
     defaultTagName: 'button',
-    render: element,
-    props: fnProps,
+    render,
+    props: mergeProps(
+      {
+        className: cn(buttonVariants({ className, size, variant })),
+        'data-slot': 'button',
+        type: 'button',
+      },
+      { ...restProps, children },
+    ),
   })
 }
 

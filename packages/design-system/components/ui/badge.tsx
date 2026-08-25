@@ -1,5 +1,4 @@
-import { useRender } from '@base-ui/react'
-import { mergeElementProps, renderElement } from '@org/design-system/lib/baseui'
+import { mergeProps, useRender } from '@base-ui/react'
 import { cn } from '@org/design-system/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type * as React from 'react'
@@ -7,16 +6,13 @@ import type * as React from 'react'
 export interface BadgeProps
   extends useRender.ComponentProps<'span'>,
     VariantProps<typeof badgeVariants> {
-  asChild?: boolean
   dotClassName?: string
   disabled?: boolean
 }
 
 export interface BadgeButtonProps
   extends useRender.ComponentProps<'button'>,
-    VariantProps<typeof badgeButtonVariants> {
-  asChild?: boolean
-}
+    VariantProps<typeof badgeButtonVariants> {}
 
 export type BadgeDotProps = React.HTMLAttributes<HTMLSpanElement>
 
@@ -186,7 +182,6 @@ const badgeButtonVariants = cva(
 
 function Badge({
   render,
-  asChild = false,
   children,
   className,
   variant,
@@ -196,50 +191,42 @@ function Badge({
   disabled,
   ...props
 }: BadgeProps) {
-  const defaultProps = {
-    className: cn(
-      badgeVariants({ variant, size, appearance, shape, disabled }),
-      className,
-    ),
-    'data-slot': 'badge',
-  }
-
-  const element = renderElement(asChild, children, render || <span />)
-  const fnProps = mergeElementProps(asChild, children, defaultProps, props)
-
   return useRender({
-    render: element,
-    props: fnProps,
+    defaultTagName: 'span',
+    render,
+    props: mergeProps(
+      {
+        className: cn(
+          badgeVariants({ variant, size, appearance, shape, disabled }),
+          className,
+        ),
+        'data-slot': 'badge',
+      },
+      { ...props, children },
+    ),
   })
 }
 
 function BadgeButton({
   render,
-  asChild = false,
   children,
   className,
   variant,
   ...props
 }: BadgeButtonProps) {
-  const defaultProps = {
-    className: cn(badgeButtonVariants({ variant, className })),
-    role: 'button' as const,
-    'data-slot': 'badge-button',
-  }
-
-  const el = renderElement(
-    asChild,
-    children,
-    render || <button type="button" />,
-  )
-  const fnProps = mergeElementProps(asChild, children, defaultProps, props)
-
-  const element = useRender({
-    render: el,
-    props: fnProps,
+  return useRender({
+    defaultTagName: 'button',
+    render,
+    props: mergeProps(
+      {
+        className: cn(badgeButtonVariants({ variant, className })),
+        role: 'button' as const,
+        'data-slot': 'badge-button',
+        type: 'button',
+      },
+      { ...props, children },
+    ),
   })
-
-  return element
 }
 
 function BadgeDot({ className, ...props }: BadgeDotProps) {

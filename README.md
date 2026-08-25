@@ -308,7 +308,7 @@ To trigger deployment:
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) installed (version 1.3.3 or higher)
+- [Bun](https://bun.sh/) installed (version 1.4.0 or higher)
 - Docker and Docker Compose (for local database)
 
 ### ⚠️ TypeScript Configuration Warning
